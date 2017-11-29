@@ -7,10 +7,10 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
         <Text>Home Screen</Text>
-        <TouchableOpacity onPress={() => navigate('SearchJobSeekers')}>
+        <TouchableOpacity onPress={() => navigate('CreateJobSeekerProfile')}>
           <Text>Job Seeker</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigate('CreateJobSeekerProfile')}>
+        <TouchableOpacity onPress={() => navigate('SearchJobSeekers')}>
           <Text>Employer</Text>
         </TouchableOpacity>
       </View>
