@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default class App extends Component {
+export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>WORKMATE</Text>
         <Text>Home Screen</Text>
         <TouchableOpacity onPress={() => alert('Job Seeker Button Pressed')}>
           <Text>Job Seeker</Text>
