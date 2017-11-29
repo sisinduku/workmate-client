@@ -3,13 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Home extends Component {
   render() {
+    const { navigate } = this.props.navigation; 
     return (
       <View style={styles.container}>
         <Text>Home Screen</Text>
-        <TouchableOpacity onPress={() => alert('Job Seeker Button Pressed')}>
+        <TouchableOpacity onPress={() => navigate('SearchJobSeekers')}>
           <Text>Job Seeker</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => alert('Employer Button Pressed')}>
+        <TouchableOpacity onPress={() => navigate('CreateJobSeekerProfile')}>
           <Text>Employer</Text>
         </TouchableOpacity>
       </View>
