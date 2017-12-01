@@ -32,8 +32,15 @@ export default class SearchJobSeeker extends Component {
     // this.props.navigation.navigate('JobSeekerList');
   }
 
-  _createTraitComponent(trait, idx) {
-    return (
+  render() {
+    const { navigate } = this.props.navigation;
+    const presetPersonalities = Object.keys(personality_presets).map((personality, idx) => ({
+      key: idx,
+      label: personality.replace(/_/g, ' '),
+      personality: personality_presets[personality]
+    }));
+
+    const createTraitComponent = (trait, idx) => (
       <View key={ idx }>
         <Text style={ styles.traitTitle }>
           {`${trait.type.toUpperCase()}: `}
@@ -60,17 +67,9 @@ export default class SearchJobSeeker extends Component {
           onValueChange={ (value) => this._changeTraitScore(trait.type, value) }
         />
       </View> 
-    )
-  }
+    );
 
-  render() {
-    const { navigate } = this.props.navigation;
-    const traits = this.state.traits.map(this._createTraitComponent);
-    const presetPersonalities = Object.keys(personality_presets).map((personality, idx) => ({
-      key: idx,
-      label: personality.replace(/_/g, ' '),
-      personality: personality_presets[personality]
-    }));
+    const traits = this.state.traits.map(createTraitComponent);
 
     return (
       <View style={ styles.container }>
