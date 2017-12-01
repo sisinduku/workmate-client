@@ -8,13 +8,20 @@ import JobSeekerProfile from './screens/JobSeekerProfile';
 import CreateJobSeekerProfile from './screens/CreateJobSeekerProfile';
 import JobSeekerOwnProfile from './screens/JobSeekerOwnProfile';
 
+const headerStyle = { backgroundColor: '#000' };
+const headerTitleStyle = { color: '#fafafa', letterSpacing: 1.5, fontSize: 14 };
+
 const rootNavigator = StackNavigator({
   /*
     HOME SCREEN
   */
   Home: {
     screen: Home,
-    navigationOptions: { headerTitle: 'Workmate' }
+    navigationOptions: { 
+      headerTitle: 'Workmate'.toUpperCase(),
+      headerStyle,
+      headerTitleStyle
+    }
   },
 
   /*
@@ -23,7 +30,11 @@ const rootNavigator = StackNavigator({
   */
   SearchJobSeekers: {
     screen: SearchJobSeekers,
-    navigationOptions: { headerTitle: 'Search Job Seekers' }
+    navigationOptions: { 
+      headerTitle: 'Search Job Seekers'.toUpperCase(),
+      headerStyle,
+      headerTitleStyle
+    }
   },
 
   /*
@@ -32,7 +43,11 @@ const rootNavigator = StackNavigator({
   */
   JobSeekerList: {
     screen: JobSeekerList,
-    navigationOptions: { headerTitle: 'Job Seeker List' }
+    navigationOptions: { 
+      headerTitle: 'Job Seeker List'.toUpperCase(),
+      headerStyle,
+      headerTitleStyle
+    }
   },
 
   /*
@@ -41,7 +56,11 @@ const rootNavigator = StackNavigator({
   */
   JobSeekerProfile: {
     screen: JobSeekerProfile,
-    navigationOptions: { headerTitle: 'Job Seeker Profile' }
+    navigationOptions: { 
+      headerTitle: 'Job Seeker Profile'.toUpperCase(),
+      headerStyle,
+      headerTitleStyle
+    }
   },
 
   /*
@@ -50,7 +69,11 @@ const rootNavigator = StackNavigator({
   */
   CreateJobSeekerProfile: {
     screen: CreateJobSeekerProfile,
-    navigationOptions: { headerTitle: 'Create Profile' }
+    navigationOptions: { 
+      headerTitle: 'Create Profile'.toUpperCase(),
+      headerStyle,
+      headerTitleStyle
+    }
   },
 
   /*
@@ -60,7 +83,11 @@ const rootNavigator = StackNavigator({
   */
   JobSeekerOwnProfile: {
     screen: JobSeekerOwnProfile,
-    navigationOptions: { headerTitle: 'Your Profile' }
+    navigationOptions: { 
+      headerTitle: 'Your Profile'.toUpperCase(),
+      headerStyle,
+      headerTitleStyle
+  }
   }
 });
 
