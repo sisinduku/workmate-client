@@ -1,21 +1,174 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TouchableOpacity,
+  ScrollView,
+  Platform
+} from 'react-native';
+import { connect } from 'react-redux'
+import { 
+  Avatar, 
+  Card,
+  FormInput,
+  Icon,
+} from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import profileReduce from '../reducers/ProfileReduce'
+import { editProfile } from '../actions/ProfileAction'
 
-export default class JobSeekerOwnProfile extends Component {
+import styles from './styles.js'
+
+class JobSeekerOwnProfile extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editForm: {
+        name: '',
+        location: '',
+        skills: '',
+        education: ''
+      },
+      editedName: false,
+      editedEducation: false,
+      editedSkills: false,
+      editedLocation: false,
+      editedSummary: false,
+    }
+  }
+  updateProfile(e, key) {
+    this.props.inputProfile[key] = e
+    this.setState(this.props.updateProfile)
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>My Profile</Text>
-      </View>
+      <KeyboardAwareScrollView
+      enableOnAndroid={true}
+      enableAutoAutomaticScroll={(Platform.OS === 'ios')}
+      style={{ backgroundColor: '#4c69a5' }}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={styles.container}
+      scrollEnabled={true}
+    >
+      <ScrollView style={styles.container}>
+        <Card title={this.props.inputProfile.name}>
+          <Avatar
+            xlarge
+            rounded
+            source={{uri: "http://www.texasrevs.com/wp-content/uploads/2016/10/dummy-image.jpg"}}
+            containerStyle={{alignSelf: 'center'}}
+          />          
+          </Card>
+          <Card title="Name">
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View>
+                { this.state.editedName && ( 
+                  <FormInput 
+                    onChangeText={(e) => this.updateProfile(e, 'name')} 
+                    value={this.props.inputProfile.name} 
+                    onBlur={() => { this.setState({editedName: false}) }} 
+                  />) 
+                }
+                { !this.state.editedName && (<Text>{this.props.inputProfile.name}</Text>) }
+              </View>
+              <Icon 
+                iconStyle={{color: '#ccc'}} 
+                name='edit' 
+                onPress={() => { this.setState({editedName: true})}} 
+              />
+            </View>
+          </Card>
+          
+          <Card title="Education">
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View>
+                { this.state.editedEducation && ( 
+                  <FormInput 
+                    onChangeText={(e) => this.updateProfile(e, 'education')} 
+                    value={this.props.inputProfile.education} 
+                    onBlur={() => { this.setState( {editedEducation: false} ) }} 
+                  />) 
+                }
+                { !this.state.editedEducation && (<Text>{this.props.inputProfile.education}</Text>) }
+              </View>
+              <Icon 
+                name='edit' 
+                iconStyle={{color: '#ccc'}} 
+                onPress={() => { this.setState({editedEducation: true})}} 
+              />
+            </View>
+          </Card>
+
+          <Card title="Skills">
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View>
+                { this.state.editedSkills && ( 
+                  <FormInput 
+                  onChangeText={(e) => this.updateProfile(e, 'skills')} 
+                  value={this.props.inputProfile.skills} 
+                    onBlur={() => { this.setState( {editedSkills: false} ) }} 
+                  />) 
+                }
+                { !this.state.editedSkills && (<Text>{this.props.inputProfile.skills}</Text>) }
+              </View>
+              <Icon 
+                name='edit' 
+                iconStyle={{color: '#ccc'}} 
+                onPress={() => { this.setState({editedSkills: true})}} 
+              />
+            </View>
+          </Card>
+
+          <Card title="Location">
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View>
+                { this.state.editedLocation && ( 
+                  <FormInput 
+                  onChangeText={(e) => this.updateProfile(e, 'location')} 
+                  value={this.props.inputProfile.location} 
+                    onBlur={() => { this.setState( {editedLocation: false} ) }} 
+                  />) 
+                }
+                { !this.state.editedLocation && (<Text>{this.props.inputProfile.location}</Text>) }
+              </View>
+              <Icon 
+                iconStyle={{color: '#ccc'}} 
+                name='edit' onPress={() => { this.setState({editedLocation: true})}} 
+              />
+            </View>
+          </Card>
+
+          <Card title="Executive Summary">
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View>
+                { this.state.editedSummary && ( 
+                  <FormInput 
+                    value={this.props.inputProfile.summary} 
+                    onBlur={() => { this.setState( {editedLocation: false} ) }} 
+                  />) 
+                }
+                { !this.state.editedSummary && (<Text>{this.props.inputProfile.summary}</Text>) }
+              </View>
+              <Icon 
+                iconStyle={{color: '#ccc'}} 
+                name='edit' onPress={() => { this.setState({editedSummary: true})}} 
+              />
+            </View>
+          </Card>
+          <View style={{height:20}}/>
+        </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const mapDispatch = (dispatch) => {
+  return { 
+    updateProfile: (input) => dispatch(editProfile(input))
+  }
+} 
+const mapState = (state) => {
+  return { inputProfile: state.ProfileReduce.inputProfile }
+}
+const profileConnect = connect(mapState, mapDispatch)(JobSeekerOwnProfile)
+export default profileConnect

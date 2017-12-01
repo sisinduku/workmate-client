@@ -1,94 +1,18 @@
-import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import React, { Component } from 'react';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import profileReduce from './reducers/ProfileReduce'
+import Router from './Router'
 
-import Home from './screens/Home';
-import SearchJobSeekers from './screens/SearchJobSeekers';
-import JobSeekerList from './screens/JobSeekerList';
-import JobSeekerProfile from './screens/JobSeekerProfile';
-import CreateJobSeekerProfile from './screens/CreateJobSeekerProfile';
-import JobSeekerOwnProfile from './screens/JobSeekerOwnProfile';
+const store = createStore(profileReduce)
 
-const headerStyle = { backgroundColor: '#000' };
-const headerTitleStyle = { color: '#fafafa', letterSpacing: 1.5, fontSize: 14 };
-
-const rootNavigator = StackNavigator({
-  /*
-    HOME SCREEN
-  */
-  Home: {
-    screen: Home,
-    navigationOptions: { 
-      headerTitle: 'Workmate'.toUpperCase(),
-      headerStyle,
-      headerTitleStyle
-    }
-  },
-
-  /*
-    Navigate from 'Home'
-    EMPLOYER ROLE ONLY - Search job seeker by personality  
-  */
-  SearchJobSeekers: {
-    screen: SearchJobSeekers,
-    navigationOptions: { 
-      headerTitle: 'Search Job Seekers'.toUpperCase(),
-      headerStyle,
-      headerTitleStyle
-    }
-  },
-
-  /*
-    Navigate from 'SearchJobSeekers'
-    EMPLOYER ROLE ONLY - See list of job seekers matched with searched queries
-  */
-  JobSeekerList: {
-    screen: JobSeekerList,
-    navigationOptions: { 
-      headerTitle: 'Job Seeker List'.toUpperCase(),
-      headerStyle,
-      headerTitleStyle
-    }
-  },
-
-  /*
-    Navigate from 'JobSeekerList'
-    EMPLOYER ROLE ONLY - See job seeker profile
-  */
-  JobSeekerProfile: {
-    screen: JobSeekerProfile,
-    navigationOptions: { 
-      headerTitle: 'Job Seeker Profile'.toUpperCase(),
-      headerStyle,
-      headerTitleStyle
-    }
-  },
-
-  /*
-    Navigate from 'Home' if job_seeker haven't create any profile
-    JOB SEEKER ROLE ONLY - Create profile (add summary, etc)
-  */
-  CreateJobSeekerProfile: {
-    screen: CreateJobSeekerProfile,
-    navigationOptions: { 
-      headerTitle: 'Create Profile'.toUpperCase(),
-      headerStyle,
-      headerTitleStyle
-    }
-  },
-
-  /*
-    Navigate from 'Home' if job_seeker has create a profile
-    else Navigate from 'CreateJobSeekerProfile'
-    JOB SEEKER ROLE ONLY - See his/her own profile
-  */
-  JobSeekerOwnProfile: {
-    screen: JobSeekerOwnProfile,
-    navigationOptions: { 
-      headerTitle: 'Your Profile'.toUpperCase(),
-      headerStyle,
-      headerTitleStyle
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Router />
+      </Provider>
+    )
   }
-  }
-});
-
-export default rootNavigator;
+}
+export default App;
