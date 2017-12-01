@@ -3,28 +3,34 @@ const window = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#4c69a5',
+    backgroundColor: '#fff',
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   input: {
-    height: 50,
     backgroundColor: '#fff',
-    marginHorizontal: 10,
-    marginVertical: 5,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    width: window.width - 30,
+    fontSize: 16,
+    paddingBottom: 10,
+    paddingLeft: 5,
+    paddingRight: 5
   },
   btn: {
-    backgroundColor: '#a7b3f9'
+    backgroundColor: '#5db2ea',
+    padding: 10
   },
-  register:{
-    marginBottom:20, 
-    width:window.width -100,
-    alignItems:'center',
-    justifyContent:'center',
-    height:50,
-    backgroundColor: '#ffae',}
+  label: {
+    fontSize: 16
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
+  }
 });
