@@ -16,7 +16,7 @@ import {
 } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import profileReduce from '../reducers/ProfileReduce'
-import { editProfile } from '../actions/ProfileAction'
+import { editProfileAPI } from '../actions/ProfileAction'
 
 import styles from './styles.js'
 
@@ -24,12 +24,6 @@ class JobSeekerOwnProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      editForm: {
-        name: '',
-        location: '',
-        skills: '',
-        education: ''
-      },
       editedName: false,
       editedEducation: false,
       editedSkills: false,
@@ -148,7 +142,7 @@ class JobSeekerOwnProfile extends Component {
                     onBlur={() => { this.setState( {editedLocation: false} ) }} 
                   />) 
                 }
-                { !this.state.editedSummary && (<Text>{this.props.inputProfile.summary}</Text>) }
+                { !this.state.editedSummary && (<Text>{this.props.inputProfile.executive_summary}</Text>) }
               </View>
               <Icon 
                 iconStyle={{color: '#ccc'}} 
