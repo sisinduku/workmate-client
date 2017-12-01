@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
+import ModalSelector from 'react-native-modal-selector';
+import { StyleSheet, Text, View, ScrollView, Dimensions, TextInput } from 'react-native';
 import { Button, Slider, Divider, Card } from 'react-native-elements';
+
+
+import { personality_presets } from './../appconfig';
 import Background from './components/Background';
 
 export default class SearchJobSeeker extends Component {
-  render() {
-    const { navigate } = this.props.navigation;
-    const deviceWidth = Dimensions.get('window').width;
-    const traits = [
-    {type: 'openness', score: 100},
-    {type: 'extraversion', score: 99},
-    {type: 'agreeableness', score: 5},
-    {type: 'conscientiousness', score: 0},
-    {type: 'curiousity', score: 100},
-    {type: 'ideal', score: 100},
-    {type: 'challenge', score: 100},
-    {type: 'practicality', score: 100},
-    {type: 'stimulation', score: 100},
-    {type: 'helping others', score: 100},
-    {type: 'tradition', score: 100},
-    {type: 'achievement', score: 100}
-    ]
-    .map((trait, idx) => (
+  constructor() {
+    super();
+    this.state = {
+      traits: personality_presets.default
+    }
+  }
+
+  _changeTraitScore(modifiedTrait, score) {
+    const traits = this.state.traits;
+    const traitIdx = traits.findIndex(trait => trait.type === modifiedTrait);
+
+    traits[traitIdx].score = score;
+    this.setState({ traits });
+  }
+
+  _setToPresetPersonality(personalityPreset) {
+    this.setState({ traits: personality_presets[personalityPreset] });
+  }
+
+  _startSearch() {
+    // sementara sebelum tembak ke API
+    // this.props.navigation.navigate('JobSeekerList');
+  }
+
+  _createTraitComponent(trait, idx) {
+    return (
       <View key={ idx }>
         <Text style={ styles.traitTitle }>
           {`${trait.type.toUpperCase()}: `}
@@ -38,23 +50,53 @@ export default class SearchJobSeeker extends Component {
         </Text>
         <Slider 
           style={{flex: 1}}
+          value={ trait.score }
           minimumValue={0}
           maximumValue={100}
           step={1}
           minimumTrackTintColor={'rgb(166,255,203)'}
           maximumTrackTintColor={'rgb(18,216,250)'}
           thumbTintColor={'rgb(255, 255, 255)'}
+          onValueChange={ (value) => this._changeTraitScore(trait.type, value) }
         />
-      </View>
-    ));
+      </View> 
+    )
+  }
+
+  render() {
+    const { navigate } = this.props.navigation;
+    const traits = this.state.traits.map(this._createTraitComponent);
+    const presetPersonalities = Object.keys(personality_presets).map((personality, idx) => ({
+      key: idx,
+      label: personality.replace(/_/g, ' '),
+      personality: personality_presets[personality]
+    }));
 
     return (
       <View style={ styles.container }>
         <ScrollView>
-          <Card 
-            title="PERSONALITY" 
+          <Card
+            title="PERSONALITY"
             containerStyle={ styles.mainCard }
             titleStyle={ styles.titleCard }
+            dividerStyle={ styles.dividerCard }
+          >
+            <ModalSelector
+              selectStyle={{borderRadius: 200}}
+              selectTextStyle={{color: 'rgb(166,255,203)'}}
+              optionContainerStyle={{backgroundColor: 'rgba(0,0,0,0.88)'}}
+              optionStyle={{borderBottomWidth: 0.4}}
+              optionTextStyle={{color: 'rgb(166,255,203)'}}
+              cancelStyle={{backgroundColor: 'rgba(0,0,0,0.88)'}}
+              cancelTextStyle={{color: '#fafafa'}}
+              backdropPressToClose={true}
+              data={presetPersonalities}
+              initValue="Preset Personalities"
+              onChange={(option)=>{ this._setToPresetPersonality(option.label.replace(/\s/g, '_')) }} />
+          </Card>
+
+          <Card 
+            containerStyle={ styles.mainCard }
             dividerStyle={ styles.dividerCard }
           >
             { traits }
@@ -63,6 +105,7 @@ export default class SearchJobSeeker extends Component {
           <Button
             buttonStyle={ styles.searchButton }
             title='Search'
+            // onPress={ () => this._startSearch() }
             onPress={() => navigate('JobSeekerList')}
           />
 
