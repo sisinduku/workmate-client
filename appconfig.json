@@ -1,0 +1,60 @@
+{
+  "personality_presets": {
+    "default": [
+      {"type": "openness", "score": 0},
+      {"type": "extraversion", "score": 0},
+      {"type": "agreeableness", "score": 0},
+      {"type": "conscientiousness", "score": 0},
+      {"type": "curiousity", "score": 0},
+      {"type": "ideal", "score": 0},
+      {"type": "challenge", "score": 0},
+      {"type": "practicality", "score": 0},
+      {"type": "stimulation", "score": 0},
+      {"type": "helping others", "score": 0},
+      {"type": "tradition", "score": 0},
+      {"type": "achievement", "score": 0}
+    ],
+    "kim_jong_un": [
+      {"type": "openness", "score": 99},
+      {"type": "extraversion", "score": 49},
+      {"type": "agreeableness", "score": 1},
+      {"type": "conscientiousness", "score": 72},
+      {"type": "curiousity", "score": 82},
+      {"type": "ideal", "score": 3},
+      {"type": "challenge", "score": 13},
+      {"type": "practicality", "score": 11},
+      {"type": "stimulation", "score": 80},
+      {"type": "helping others", "score": 18},
+      {"type": "tradition", "score": 11},
+      {"type": "achievement", "score": 19}
+    ],
+    "emma_watson": [
+      {"type": "openness", "score": 99},
+      {"type": "extraversion", "score": 29},
+      {"type": "agreeableness", "score": 42},
+      {"type": "conscientiousness", "score": 65},
+      {"type": "curiousity", "score": 99},
+      {"type": "ideal", "score": 85},
+      {"type": "challenge", "score": 46},
+      {"type": "practicality", "score": 3},
+      {"type": "stimulation", "score": 76},
+      {"type": "helping others", "score": 56},
+      {"type": "tradition", "score": 13},
+      {"type": "achievement", "score": 68}
+    ],
+    "robert_mugabe": [
+      {"type": "openness", "score": 99},
+      {"type": "extraversion", "score": 58},
+      {"type": "agreeableness", "score": 15},
+      {"type": "conscientiousness", "score": 92},
+      {"type": "curiousity", "score": 82},
+      {"type": "ideal", "score": 7},
+      {"type": "challenge", "score": 5},
+      {"type": "practicality", "score": 4},
+      {"type": "stimulation", "score": 76},
+      {"type": "helping others", "score": 9},
+      {"type": "tradition", "score": 25},
+      {"type": "achievement", "score": 14}      
+    ]
+  }
+}
