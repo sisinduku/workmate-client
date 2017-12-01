@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1.6,
     fontSize: 10,
     fontWeight: 'bold',
-    textAlign: 'right'
+    textAlign: 'left'
   },
   traitScore: {
     color: 'rgb(166,255,203)'
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     color: '#fafafa',
     fontSize: 10,
     fontWeight: 'normal',
-    textAlign: 'right',
+    textAlign: 'left',
     marginTop: 5
   },
   searchButton: {

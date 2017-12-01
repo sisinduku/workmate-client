@@ -15,7 +15,7 @@ export default class JobSeekerList extends Component {
         ]}
         keyExtractor={ (item, index) => index }
         renderItem={({ item}) => (
-          <TouchableOpacity style={ styles.listWrapper }>
+          <TouchableOpacity style={ styles.listWrapper } onPress={() => navigate('JobSeekerProfile') }>
             <View style={ styles.imageWrapper }>
               <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
             </View>
