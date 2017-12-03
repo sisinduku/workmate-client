@@ -19,8 +19,18 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "expo": "^23.0.4",
+    "link": "^0.1.5",
     "react": "16.0.0",
-    "react-native": "0.50.3"
+    "react-native": "^0.50.3",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-elements": "^0.18.4",
+    "react-native-keyboard-aware-scroll-view": "^0.4.1",
+    "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-navigation": "^1.0.0-beta.21",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }
