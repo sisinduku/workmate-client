@@ -16,7 +16,7 @@ import {
 } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import profileReduce from '../reducers/ProfileReduce'
-import { editProfileAPI } from '../actions/ProfileAction'
+import { getProfileAPI, editProfileAPI } from '../actions/ProfileAction'
 
 import styles from './styles.js'
 
@@ -31,9 +31,13 @@ class JobSeekerOwnProfile extends Component {
       editedSummary: false,
     }
   }
-  updateProfile(e, key) {
+  conponentWillMount() {
+    console.log(this.props.id)
+    this.props.getProfile(this.props.id)
+  }
+  changeForm(e, key) {
     this.props.inputProfile[key] = e
-    this.setState(this.props.updateProfile)
+    this.setState(this.props.inputProfile)
   }
   render() {
     return (
@@ -53,15 +57,18 @@ class JobSeekerOwnProfile extends Component {
             source={{uri: "http://www.texasrevs.com/wp-content/uploads/2016/10/dummy-image.jpg"}}
             containerStyle={{alignSelf: 'center'}}
           />          
-          </Card>
-          <Card title="Name">
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+        </Card>
+        <Card title="Name">
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <View>
                 { this.state.editedName && ( 
                   <FormInput 
-                    onChangeText={(e) => this.updateProfile(e, 'name')} 
+                    onChangeText={(e) => this.changeForm(e, 'name')} 
                     value={this.props.inputProfile.name} 
-                    onBlur={() => { this.setState({editedName: false}) }} 
+                    onBlur={() => { 
+                      this.props.updateProfile(this.props.inputProfile, this.props.id) 
+                      this.setState({editedName: false}) 
+                    }} 
                   />) 
                 }
                 { !this.state.editedName && (<Text>{this.props.inputProfile.name}</Text>) }
@@ -79,12 +86,15 @@ class JobSeekerOwnProfile extends Component {
               <View>
                 { this.state.editedEducation && ( 
                   <FormInput 
-                    onChangeText={(e) => this.updateProfile(e, 'education')} 
+                    onChangeText={(e) => this.changeForm(e, 'education')} 
                     value={this.props.inputProfile.education} 
-                    onBlur={() => { this.setState( {editedEducation: false} ) }} 
+                    onBlur={() => { 
+                      this.props.updateProfile(this.props.inputProfile, this.props.id) 
+                      this.setState( {editedEducation: false} ) 
+                    }} 
                   />) 
                 }
-                { !this.state.editedEducation && (<Text>{this.props.inputProfile.education}</Text>) }
+                { !this.state.editedEducation && (<Text>{this.props.inputProfile.educations}</Text>) }
               </View>
               <Icon 
                 name='edit' 
@@ -99,9 +109,12 @@ class JobSeekerOwnProfile extends Component {
               <View>
                 { this.state.editedSkills && ( 
                   <FormInput 
-                  onChangeText={(e) => this.updateProfile(e, 'skills')} 
+                  onChangeText={(e) => this.changeForm(e, 'skills')} 
                   value={this.props.inputProfile.skills} 
-                    onBlur={() => { this.setState( {editedSkills: false} ) }} 
+                  onBlur={() => { 
+                    this.props.updateProfile(this.props.inputProfile, this.props.id) 
+                    this.setState( {editedSkills: false} ) 
+                  }} 
                   />) 
                 }
                 { !this.state.editedSkills && (<Text>{this.props.inputProfile.skills}</Text>) }
@@ -119,9 +132,12 @@ class JobSeekerOwnProfile extends Component {
               <View>
                 { this.state.editedLocation && ( 
                   <FormInput 
-                  onChangeText={(e) => this.updateProfile(e, 'location')} 
+                  onChangeText={(e) => this.changeForm(e, 'location')} 
                   value={this.props.inputProfile.location} 
-                    onBlur={() => { this.setState( {editedLocation: false} ) }} 
+                  onBlur={() => { 
+                    this.props.updateProfile(this.props.inputProfile, this.props.id) 
+                    this.setState( {editedLocation: false} ) 
+                  }} 
                   />) 
                 }
                 { !this.state.editedLocation && (<Text>{this.props.inputProfile.location}</Text>) }
@@ -138,8 +154,11 @@ class JobSeekerOwnProfile extends Component {
               <View>
                 { this.state.editedSummary && ( 
                   <FormInput 
-                    value={this.props.inputProfile.summary} 
-                    onBlur={() => { this.setState( {editedLocation: false} ) }} 
+                    value={this.props.inputProfile.executive_summary} 
+                    onBlur={() => { 
+                      this.props.updateProfile(this.props.inputProfile, this.props.id) 
+                      this.setState( {editedLocation: false} ) 
+                    }} 
                   />) 
                 }
                 { !this.state.editedSummary && (<Text>{this.props.inputProfile.executive_summary}</Text>) }
@@ -158,11 +177,12 @@ class JobSeekerOwnProfile extends Component {
 }
 const mapDispatch = (dispatch) => {
   return { 
-    updateProfile: (input) => dispatch(editProfile(input))
+    updateProfile: (input, id) => dispatch(editProfileAPI(input, id)),
+    getProfile: (id) => dispatch(getProfileAPI(id))
   }
 } 
 const mapState = (state) => {
-  return { inputProfile: state.ProfileReduce.inputProfile }
+  return { inputProfile: state.ProfileReduce.inputProfile, id: state.ProfileReduce.id }
 }
 const profileConnect = connect(mapState, mapDispatch)(JobSeekerOwnProfile)
 export default profileConnect
