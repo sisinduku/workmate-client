@@ -22,7 +22,7 @@ class JobSeekerList extends Component {
             </View>
             <View style={ styles.jobSeekerWrapper }>
               <Text style={{ fontSize: 10, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ item.jobSeeker.name.toUpperCase() }</Text>
-              <Text style={{ fontSize: 7, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>{ item.jobSeeker.location }</Text>
+              <Text style={{ fontSize: 9, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>{ item.jobSeeker.location }</Text>
             </View>
             <View style={ styles.compatibilityWrapper }>
             <Text style={{ fontSize: 6, fontWeight: 'bold', color: 'rgb(18,216,250)' }}>COMPATIBILITY</Text>

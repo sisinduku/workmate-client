@@ -159,8 +159,8 @@ class JobSeekerProfile extends Component {
             <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
           </View>
           <View style={ styles.jobSeekerWrapper }>
-            <Text style={{ fontSize: 10, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>JOBSEEKER NAME</Text>
-            <Text style={{ fontSize: 7, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>JAKARTA, ID</Text>
+            <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ jobSeeker.jobSeeker.name.toUpperCase() }</Text>
+            <Text style={{ fontSize: 9, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>{ jobSeeker.jobSeeker.location }</Text>
           </View>
         </View>
 
