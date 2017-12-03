@@ -52,30 +52,32 @@ export const resetProcess = () => {
 export const addProfileAPI = (inputProfile) => {
   return (dispatch, getState) => {
     dispatch(startAddProfile())
-    console.log(inputProfile)
     axios.post(URI, inputProfile)
     .then(({data}) => {
-         console.log(data)
-      dispatch(addProfile(data))
-      dispatch(finishAddProfile())
+      AsyncStorage.setItem('profile', JSON.stringify(data))
+        .then(value => {
+          dispatch(addProfile(data))
+          dispatch(finishAddProfile())
+        })
+        .catch(reason => console.error(reason))
     })
     .catch(err => {
       console.log(err)
     })
     // inputProfile['_id'] = '5a21680ccf5895722c668c8a'
-    // setTimeout(function(){ 
+    // setTimeout(function(){
     //   dispatch(startAddProfile())
+    // console.log(data)
     //   dispatch(addProfile(inputProfile))
     //   console.log(inputProfile)
     // }, 2000);
-    // dispatch(finishAddProfile())  
+    // dispatch(finishAddProfile())
   }
 }
 export const getProfileAPI = (id) => {
   return (dispatch, getState) => {
      axios.get(URI+'/'+id)
     .then(({data}) => {
-      console.log(data)
       dispatch(getProfile(data))
       dispatch(finishAddProfile())
     })
