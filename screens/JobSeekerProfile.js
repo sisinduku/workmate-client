@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { Card, Slider, Badge } from 'react-native-elements';
 
-export default class JobSeekerProfile extends Component {
+const mapStateToProps = (state) => ({
+  searchResult: state.EmployerReducer.searchResult
+});
+
+class JobSeekerProfile extends Component {
   constructor() {
     super();
     this.state = {
@@ -41,13 +46,12 @@ export default class JobSeekerProfile extends Component {
   render() {
     const deviceWidth = Dimensions.get('window').width;
     const deviceHeight = Dimensions.get('window').height;
-    const skills = [
-    'ReactJS',
-    'NodeJS',
-    'MongoDB',
-    'Git',
-    'Jest']
-    .map((skill, idx) => (
+    const jobSeeker = this.props.searchResult.find(item => item.jobSeeker._id == this.props.navigation.state.params._id);
+
+    const executive_summary = jobSeeker.jobSeeker.executive_summary.split('\n\n').map(sentence => sentence.replace('\n', ' '));
+
+
+    const skills = jobSeeker.jobSeeker.skills.map((skill, idx) => (
       <Badge
         key={ idx }
         value={skill}
@@ -60,13 +64,8 @@ export default class JobSeekerProfile extends Component {
         textStyle={{ color: 'rgb(166,255,203)' }}
       />
     ));
-    const educations = [
-      'SD Negeri Banjarsari I',
-      'SMP Negeri 5 Bandung',
-      'SMA Negeri 3 Bandung',
-      'Departemen Arkeologi, Universitas Indonesia'
-    ]
-    .map((education, idx) => (
+
+    const educations = jobSeeker.jobSeeker.educations.map((education, idx) => (
       <Badge
         key={ idx }
         value={education}
@@ -82,25 +81,53 @@ export default class JobSeekerProfile extends Component {
           color: 'rgb(166,255,203)'
         }}
       />
-    ))
-    const traits = [
-    {type: 'openness', score: 88},
-    {type: 'extraversion', score: 99},
-    {type: 'agreeableness', score: 5},
-    {type: 'conscientiousness', score: 1},
-    {type: 'curiousity', score: 30},
-    {type: 'ideal', score: 76},
-    {type: 'challenge', score: 30},
-    {type: 'practicality', score: 14},
-    {type: 'stimulation', score: 42},
-    {type: 'helping others', score: 12},
-    {type: 'tradition', score: 44},
-    {type: 'achievement', score: 68}
-    ]
+    ));
+
+    const insight = JSON.parse(jobSeeker.jobSeeker.personality_insight)
+    const personalities = insight.personality;
+    const needs = insight.needs;
+    const values = insight.values;
+
+    const mainTraits = personalities.concat(needs).concat(values).map(p => ({
+      trait_id: p.trait_id,
+      name: p.name,
+      score: Math.round(p.percentile * 100)
+    }));
+
+    const childTraits = personalities.concat(needs).concat(values).reduce((ct, p) => {
+      if (p.children && p.children.length > 0) {
+        const pcTraits = p.children.map(pc => ({
+          trait_id: pc.trait_id,
+          name: pc.name,
+          score: Math.round(pc.percentile * 100)
+        }));
+
+        ct = ct.concat(pcTraits);
+      }
+
+      return ct;
+    }, []);
+
+    const dt = [     
+      'big5_openness',
+      'big5_extraversion',
+      'big5_agreeableness',
+      'big5_conscientiousness',
+      'need_curiosity',
+      'need_ideal',
+      'need_challenge',
+      'need_practicality',
+      'value_openness_to_change',
+      'value_self_transcendence',
+      'value_conservation',
+      'value_self_enhancement'
+    ];
+    const traits = mainTraits.concat(childTraits)
+    .filter(trait => dt.indexOf(trait.trait_id) !== -1)
     .map((trait, idx) => (
       <View key={ idx }>
         <Text style={ styles.traitTitle }>
-          {`${trait.type.toUpperCase()}: `}
+          {`${trait.name.toUpperCase()}: `}
           <Text style={ styles.traitScore }>
           {
             String(trait.score).length === 1 ? `  ${String(trait.score)}%` 
@@ -170,7 +197,14 @@ export default class JobSeekerProfile extends Component {
               containerStyle={ styles.tabContainerCards }
               dividerStyle={ styles.tabContainerCardsDivider }
             >
-              <Text style={{color: '#fafafa'}}>SUMMARY</Text>
+              {
+                executive_summary.map((xs, idx) => (
+                  <View key={idx}>
+                    <Text style={{color: '#ffffff', justifyContent: 'center'}}>{ xs }</Text>
+                    <Text>{'\n'}</Text>
+                  </View>
+                ))
+              }
             </Card>
           </View>
         </ScrollView>
@@ -292,3 +326,5 @@ const styles = StyleSheet.create({
     height: 10
   }
 });
+
+export default connect(mapStateToProps, null)(JobSeekerProfile);

@@ -13,10 +13,11 @@ import {
   FormLabel, 
   FormInput, 
   Button 
-} from 'react-native-elements'
+} from 'react-native-elements';
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import profileReduce from '../reducers/ProfileReduce'
+import profileReducer from '../reducers/ProfileReducer'
 import { addProfile } from '../actions/ProfileAction'
 
 import styles from './styles';
@@ -73,7 +74,7 @@ const mapDispatch = (dispatch) => {
   }
 } 
 const mapState = (state) => {
-  return { inputProfile: state.ProfileReduce.inputProfile }
+  return { inputProfile: state.ProfileReducer.inputProfile }
 }
 const profileConnect = connect(mapState, mapDispatch)(CreateJobSeekerProfile)
 export default profileConnect
