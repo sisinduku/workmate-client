@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import ProfileReducer from './ProfileReducer';
+import ProfileReduce from './ProfileReduce';
 import EmployerReducer from './EmployerReducer';
 
 export default combineReducers({
-  ProfileReducer,
+  ProfileReduce,
   EmployerReducer
 });
