@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import Home from './screens/Home';
 import SearchJobSeekers from './screens/SearchJobSeekers';
@@ -7,6 +7,7 @@ import JobSeekerList from './screens/JobSeekerList';
 import JobSeekerProfile from './screens/JobSeekerProfile';
 import CreateJobSeekerProfile from './screens/CreateJobSeekerProfile';
 import JobSeekerOwnProfile from './screens/JobSeekerOwnProfile';
+import Loading from './screens/Loading';
 
 const rootNavigator = StackNavigator({
   /*
@@ -16,7 +17,9 @@ const rootNavigator = StackNavigator({
     screen: Home,
     navigationOptions: { headerTitle: 'Workmate' }
   },
-
+  Loading: {
+    screen: Loading,
+  },
   /*
     Navigate from 'Home'
     EMPLOYER ROLE ONLY - Search job seeker by personality  
@@ -43,16 +46,14 @@ const rootNavigator = StackNavigator({
     screen: JobSeekerProfile,
     navigationOptions: { headerTitle: 'Job Seeker Profile' }
   },
-
-  /*
-    Navigate from 'Home' if job_seeker haven't create any profile
-    JOB SEEKER ROLE ONLY - Create profile (add summary, etc)
-  */
   CreateJobSeekerProfile: {
     screen: CreateJobSeekerProfile,
     navigationOptions: { headerTitle: 'Create Profile' }
   },
-
+  /*
+    Navigate from 'Home' if job_seeker haven't create any profile
+    JOB SEEKER ROLE ONLY - Create profile (add summary, etc)
+  */
   /*
     Navigate from 'Home' if job_seeker has create a profile
     else Navigate from 'CreateJobSeekerProfile'
@@ -61,6 +62,11 @@ const rootNavigator = StackNavigator({
   JobSeekerOwnProfile: {
     screen: JobSeekerOwnProfile,
     navigationOptions: { headerTitle: 'Your Profile' }
+  }
+}, {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
   }
 });
 
