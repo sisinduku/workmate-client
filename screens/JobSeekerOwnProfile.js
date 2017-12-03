@@ -15,7 +15,7 @@ import {
   Icon,
 } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import profileReduce from '../reducers/ProfileReduce'
+import profileReducer from '../reducers/ProfileReducer'
 import { editProfile } from '../actions/ProfileAction'
 
 import styles from './styles.js'
@@ -168,7 +168,7 @@ const mapDispatch = (dispatch) => {
   }
 } 
 const mapState = (state) => {
-  return { inputProfile: state.ProfileReduce.inputProfile }
+  return { inputProfile: state.ProfileReducer.profile }
 }
 const profileConnect = connect(mapState, mapDispatch)(JobSeekerOwnProfile)
 export default profileConnect

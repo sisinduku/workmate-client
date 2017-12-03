@@ -1,60 +1,122 @@
 {
+  "traitDescriptions": [
+    {
+      "type": "big5_openness",
+      "name": "openness",
+      "descriptions": "Openness to experience.\nHigher: Intellectually curious, emotionally-aware, sensitive to beauty and willing to try new things.\nLower: Preferring the plain, straightforward, and obvious over the complex, ambiguous, and subtle."
+    },
+    {
+      "type": "big5_extraversion",
+      "name": "extraversion",
+      "descriptions": "Higher: More energetic and pronounced engagement with the external world. Likes high group visibility, talking, and asserting themselves.\nLower: Needs less stimulation and are more independent of their social world. It does not mean they are shy, un-friendly, or antisocial."
+    },
+    {
+      "type": "big5_agreeableness",
+      "name": "agreeableness",
+      "descriptions": "Higher: Value getting along with others. They have a more optimistic view of human nature.\nLower: Value self interests over others. They are more skeptical of others' motives."
+    },
+    {
+      "type" : "big5_conscientiousness",
+      "name": "conscientiousness",
+      "descriptions": "Higher: More self-disciplined, dutiful, or aiming for achievement against measures or outside expectations.\nLower: More likely to prefer the spontaneous over the planned."
+    },
+    {
+      "type" : "need_curiosity",
+      "name": "curiousity",
+      "descriptions": "A need to pursue experiences that foster learning, exploration, and growth."
+    },
+    {
+      "type" : "need_ideal",
+      "name": "ideal",
+      "descriptions": "A desire to satisfy one's idea of perfection in a lifestyle or experience, oftentimes seen as pursuing a sense of community."
+    },
+    {
+      "type" : "need_challenge",
+      "name": "challenge",
+      "descriptions": "A desire to achieve, succeed, compete, or pursue experiences that test one's abilities."
+    },
+    {
+      "type" : "need_practicality",
+      "name": "practicality",
+      "descriptions": "A desire for getting the job done, skill, and efficiency."
+    },
+    {
+      "type" : "value_openness_to_change",
+      "name": "stimulation",
+      "descriptions": "Excitement, novelty, and challenge in life."
+    },
+    {
+      "type" : "value_self_transcendence",
+      "name": "helping others",
+      "descriptions": "Preserving and enhancing the welfare of those with whom one is in frequent personal contact."
+    },
+    {
+      "type" : "value_conservation",
+      "name": "tradition",
+      "descriptions": "Respect, commitment, and acceptance of the customs and ideas that one's culture and/or religion provides."
+    },
+    {
+      "type" : "value_self_enhancement",
+      "name": "achievement",
+      "descriptions": "Personal success through demonstrating competence according to social standards."
+    }
+  ],
   "personality_presets": {
     "default": [
-      {"type": "openness", "score": 0},
-      {"type": "extraversion", "score": 0},
-      {"type": "agreeableness", "score": 0},
-      {"type": "conscientiousness", "score": 0},
-      {"type": "curiousity", "score": 0},
-      {"type": "ideal", "score": 0},
-      {"type": "challenge", "score": 0},
-      {"type": "practicality", "score": 0},
-      {"type": "stimulation", "score": 0},
-      {"type": "helping others", "score": 0},
-      {"type": "tradition", "score": 0},
-      {"type": "achievement", "score": 0}
+      {"type": "big5_openness", "name": "openness", "score": 0},
+      {"type": "big5_extraversion", "name": "extraversion", "score": 0},
+      {"type": "big5_agreeableness", "name": "agreeableness", "score": 0},
+      {"type" : "big5_conscientiousness", "name": "conscientiousness", "score": 0},
+      {"type" : "need_curiosity", "name": "curiousity", "score": 0},
+      {"type" : "need_ideal", "name": "ideal", "score": 0},
+      {"type" : "need_challenge", "name": "challenge", "score": 0},
+      {"type" : "need_practicality", "name": "practicality", "score": 0},
+      {"type" : "value_openness_to_change", "name": "stimulation", "score": 0},
+      {"type" : "value_self_transcendence", "name": "helping others", "score": 0},
+      {"type" : "value_conservation", "name": "tradition", "score": 0},
+      {"type" : "value_self_enhancement", "name": "achievement", "score": 0}
     ],
     "kim_jong_un": [
-      {"type": "openness", "score": 99},
-      {"type": "extraversion", "score": 49},
-      {"type": "agreeableness", "score": 1},
-      {"type": "conscientiousness", "score": 72},
-      {"type": "curiousity", "score": 82},
-      {"type": "ideal", "score": 3},
-      {"type": "challenge", "score": 13},
-      {"type": "practicality", "score": 11},
-      {"type": "stimulation", "score": 80},
-      {"type": "helping others", "score": 18},
-      {"type": "tradition", "score": 11},
-      {"type": "achievement", "score": 19}
+      {"type": "big5_openness", "name": "openness", "score": 99},
+      {"type": "big5_extraversion", "name": "extraversion", "score": 49},
+      {"type": "big5_agreeableness", "name": "agreeableness", "score": 1},
+      {"type" : "big5_conscientiousness", "name": "conscientiousness", "score": 72},
+      {"type" : "need_curiosity", "name": "curiousity", "score": 82},
+      {"type" : "need_ideal", "name": "ideal", "score": 3},
+      {"type" : "need_challenge", "name": "challenge", "score": 13},
+      {"type" : "need_practicality", "name": "practicality", "score": 11},
+      {"type" : "value_openness_to_change", "name": "stimulation", "score": 80},
+      {"type" : "value_self_transcendence", "name": "helping others", "score": 18},
+      {"type" : "value_conservation", "name": "tradition", "score": 11},
+      {"type" : "value_self_enhancement", "name": "achievement", "score": 19}
     ],
     "emma_watson": [
-      {"type": "openness", "score": 99},
-      {"type": "extraversion", "score": 29},
-      {"type": "agreeableness", "score": 42},
-      {"type": "conscientiousness", "score": 65},
-      {"type": "curiousity", "score": 99},
-      {"type": "ideal", "score": 85},
-      {"type": "challenge", "score": 46},
-      {"type": "practicality", "score": 3},
-      {"type": "stimulation", "score": 76},
-      {"type": "helping others", "score": 56},
-      {"type": "tradition", "score": 13},
-      {"type": "achievement", "score": 68}
+      {"type": "big5_openness", "name": "openness", "score": 99},
+      {"type": "big5_extraversion", "name": "extraversion", "score": 29},
+      {"type": "big5_agreeableness", "name": "agreeableness", "score": 42},
+      {"type" : "big5_conscientiousness", "name": "conscientiousness", "score": 65},
+      {"type" : "need_curiosity", "name": "curiousity", "score": 99},
+      {"type" : "need_ideal", "name": "ideal", "score": 85},
+      {"type" : "need_challenge", "name": "challenge", "score": 46},
+      {"type" : "need_practicality", "name": "practicality", "score": 3},
+      {"type" : "value_openness_to_change", "name": "stimulation", "score": 76},
+      {"type" : "value_self_transcendence", "name": "helping others", "score": 56},
+      {"type" : "value_conservation", "name": "tradition", "score": 13},
+      {"type" : "value_self_enhancement", "name": "achievement", "score": 68}
     ],
     "robert_mugabe": [
-      {"type": "openness", "score": 99},
-      {"type": "extraversion", "score": 58},
-      {"type": "agreeableness", "score": 15},
-      {"type": "conscientiousness", "score": 92},
-      {"type": "curiousity", "score": 82},
-      {"type": "ideal", "score": 7},
-      {"type": "challenge", "score": 5},
-      {"type": "practicality", "score": 4},
-      {"type": "stimulation", "score": 76},
-      {"type": "helping others", "score": 9},
-      {"type": "tradition", "score": 25},
-      {"type": "achievement", "score": 14}      
+      {"type": "big5_openness", "name": "openness", "score": 99},
+      {"type": "big5_extraversion", "name": "extraversion", "score": 58},
+      {"type": "big5_agreeableness", "name": "agreeableness", "score": 15},
+      {"type" : "big5_conscientiousness", "name": "conscientiousness", "score": 92},
+      {"type" : "need_curiosity", "name": "curiousity", "score": 82},
+      {"type" : "need_ideal", "name": "ideal", "score": 7},
+      {"type" : "need_challenge", "name": "challenge", "score": 5},
+      {"type" : "need_practicality", "name": "practicality", "score": 4},
+      {"type" : "value_openness_to_change", "name": "stimulation", "score": 76},
+      {"type" : "value_self_transcendence", "name": "helping others", "score": 9},
+      {"type" : "value_conservation", "name": "tradition", "score": 25},
+      {"type" : "value_self_enhancement", "name": "achievement", "score": 14}      
     ]
   }
 }

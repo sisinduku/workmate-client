@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import profileReduce from './reducers/ProfileReduce'
-import Router from './Router'
+import { Provider } from 'react-redux';
 
-const store = createStore(profileReduce)
+import store from './store';
+import Router from './Router';
 
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <Router />
       </Provider>
     )

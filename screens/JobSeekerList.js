@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {Text, View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { List, ListItem, Card, Button } from 'react-native-elements';
 
-export default class JobSeekerList extends Component {
+const mapStateToProps = (state) => ({
+  searchResult: state.EmployerReducer.searchResult
+});
+
+class JobSeekerList extends Component {
   render() {
     const { navigate } = this.props.navigation;
-
     return (
       <FlatList
         style={ styles.container }
-        data={[
-          {name: 'Job Seeker One', skills: 'Uhuy', 'compatibility': '90%'},
-          {name: 'Job Seeker Two', skills: 'Ngahey', 'compatibility': '56%'}
-        ]}
-        keyExtractor={ (item, index) => index }
-        renderItem={({ item}) => (
-          <TouchableOpacity style={ styles.listWrapper } onPress={() => navigate('JobSeekerProfile') }>
+        data={this.props.searchResult}
+        keyExtractor={ (item, index) => item.jobSeeker._id }
+        renderItem={({ item }) => (
+          <TouchableOpacity style={ styles.listWrapper } onPress={() => navigate('JobSeekerProfile', { _id: item.jobSeeker._id }) }>
             <View style={ styles.imageWrapper }>
               <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
             </View>
             <View style={ styles.jobSeekerWrapper }>
-              <Text style={{ fontSize: 10, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ item.name.toUpperCase() }</Text>
-              <Text style={{ fontSize: 7, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>JAKARTA, ID</Text>
+              <Text style={{ fontSize: 10, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ item.jobSeeker.name.toUpperCase() }</Text>
+              <Text style={{ fontSize: 7, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>{ item.jobSeeker.location }</Text>
             </View>
             <View style={ styles.compatibilityWrapper }>
             <Text style={{ fontSize: 6, fontWeight: 'bold', color: 'rgb(18,216,250)' }}>COMPATIBILITY</Text>
-              <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'rgb(166,255,203)' }}>{item.compatibility}</Text>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'rgb(166,255,203)' }}>{Math.round(item.similarity * 100)}%</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -71,3 +72,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+export default connect(mapStateToProps, null)(JobSeekerList);
