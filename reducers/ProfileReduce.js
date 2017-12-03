@@ -1,4 +1,4 @@
-import { 
+import {
   ADD_PROFILE,
   GET_PROFILE,
   EDIT_PROFILE,
@@ -21,7 +21,8 @@ const profileState = {
   id: '',
   process: false,
   statusForm: false,
-  message: ''
+  message: '',
+  isDone: false,
 }
 const ProfileReduce = (state = profileState, action) => {
   switch(action.type) {
@@ -34,11 +35,11 @@ const ProfileReduce = (state = profileState, action) => {
     case SET_FORM_STATUS:
       return {...state, statusForm: action.status}
     case START_ADD_PROFILE:
-      return {...state, process: false}
-    case FINISH_ADD_PROFILE:
       return {...state, process: true}
+    case FINISH_ADD_PROFILE:
+      return {...state, process: false, isDone: true}
     case RESET_PROCESS:
-      return {...state, process: false}
+      return {...state, process: false, isDone: false}
     default:
       return state
   }

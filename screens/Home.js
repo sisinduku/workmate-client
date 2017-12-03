@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { AsyncStorage, StyleSheet, Text, View, Image } from 'react-native';
 import { Button, Slider, Divider, Card } from 'react-native-elements';
 
 import Background from './components/Background';
@@ -24,7 +24,18 @@ export default class Home extends Component {
         <Button
           buttonStyle={ styles.button }
           title='JOB SEEKER'
-          onPress={() => navigate('CreateJobSeekerProfile')}
+          onPress={async () => {
+            try {
+              const profile = await AsyncStorage.getItem('profile')
+              if (profile) {
+                return navigate('JobSeekerOwnProfile')
+              } else {
+                return navigate('CreateJobSeekerProfile')
+              }
+            } catch (e) {
+              console.error(e.message)
+            }
+          }}
         />
         <Button
           buttonStyle={ styles.button }
