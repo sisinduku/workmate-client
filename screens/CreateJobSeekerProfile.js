@@ -38,6 +38,9 @@ class CreateJobSeekerProfile extends Component {
     }
   }
   save(input) {
+    if(!this.props.process) {
+      this.props.navigation.navigate('Loading')
+    }
     this.props.saveProfile(input)
   }
   changeProfile(e, key) {

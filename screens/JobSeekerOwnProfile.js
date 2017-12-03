@@ -7,7 +7,8 @@ import {
   ScrollView,
   Platform,
   AsyncStorage,
-  Button
+  Button,
+  BackAndroid
 } from 'react-native';
 import { connect } from 'react-redux'
 import {
@@ -43,6 +44,11 @@ class JobSeekerOwnProfile extends Component {
     this.props.inputProfile[key] = e
     this.setState(this.props.inputProfile)
   }
+  // componentWillMount() {
+  //   BackAndroid.addEventListener('hardwareButtonPress', () => 
+  //     this.props.navigation.navigate('Home')
+  //   ) 
+  // }
   logout() {
     AsyncStorage.removeItem('profile')
     .then(value => {

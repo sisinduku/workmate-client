@@ -3,8 +3,6 @@ import {
   View, 
   ActivityIndicator
 } from 'react-native'
-import profileReduce from '../reducers/ProfileReduce'
-import { addProfileAPI, setStatusForm, resetProcess } from '../actions/ProfileAction'
 
 class Loading extends Component {
   constructor (props) {
