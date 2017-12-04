@@ -200,7 +200,7 @@ class JobSeekerProfile extends Component {
               {
                 executive_summary.map((xs, idx) => (
                   <View key={idx}>
-                    <Text style={{color: '#ffffff', justifyContent: 'center'}}>{ xs }</Text>
+                    <Text style={{color: '#ffffff', justifyContent: 'center', textAlign: 'justify'}}>{ xs }</Text>
                     <Text>{'\n'}</Text>
                   </View>
                 ))
