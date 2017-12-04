@@ -12,8 +12,8 @@ const profileState = {
   inputProfile: {
     name: '',
     location: '',
-    educations: '',
-    skills: '',
+    educations: [],
+    skills: [],
     executive_summary: '',
     personality_insight: '',
     password: 'abc'
