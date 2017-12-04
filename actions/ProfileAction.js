@@ -68,18 +68,31 @@ export const addProfileAPI = (inputProfile) => {
 }
 export const getProfileAPI = (id) => {
   return (dispatch, getState) => {
-     axios.get(URI+'/'+id)
+    axios.get(URI+'/'+id)
     .then(({data}) => {
-      dispatch(getProfile(data))
-      dispatch(finishAddProfile())
+        dispatch(getProfile(data))
+        dispatch(finishAddProfile())
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
 }
 export const editProfileAPI = (inputProfile, id) => {
-  return (dispatch, getState) => {
+    console.log('data from State===========>', inputProfile)  
+    AsyncStorage.setItem('profile', JSON.stringify(inputProfile))
+
+    return (dispatch, getState) => {
     axios.put(URI+'/'+id, inputProfile)
     .then(({data}) => {
-      dispatch(editProfile(data))
+      console.log('data from API===========>', data)
+      dispatch(editProfile(data))        
+      // AsyncStorage.setItem('profile', JSON.stringify(data) );
+      // console.log('data from API A===========>', data)
+      // dispatch(editProfile(data))        
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
 }

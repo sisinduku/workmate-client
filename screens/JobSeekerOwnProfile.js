@@ -37,17 +37,20 @@ class JobSeekerOwnProfile extends Component {
     AsyncStorage.getItem('profile')
       .then(profile => {
         props.addProfile(JSON.parse(profile))
-      })
+    })
   }
   changeForm(e, key) {
-    this.props.inputProfile[key] = e
+    if(key == 'educations') {
+      this.props.inputProfile.educations = e.split(',')
+    }
+    else if(key == 'skills') {
+      this.props.inputProfile.skills = e.split(',')
+    }
+    else {
+      this.props.inputProfile[key] = e
+    }
     this.setState(this.props.inputProfile)
   }
-  // componentWillMount() {
-  //   BackAndroid.addEventListener('hardwareButtonPress', () =>
-  //     this.props.navigation.navigate('Home')
-  //   )
-  // }
   logout() {
     AsyncStorage.removeItem('profile')
     .then(value => {
@@ -102,15 +105,15 @@ class JobSeekerOwnProfile extends Component {
               <View>
                 { this.state.editedEducation && (
                   <FormInput
-                    onChangeText={(e) => this.changeForm(e, 'education')}
-                    value={this.props.inputProfile.education}
+                    onChangeText={(e) => this.changeForm(e, 'educations')}
+                    value={this.props.inputProfile.educations && this.props.inputProfile.educations.join()}
                     onBlur={() => {
                       this.props.updateProfile(this.props.inputProfile, this.props.id)
                       this.setState( {editedEducation: false} )
                     }}
                   />)
                 }
-                { !this.state.editedEducation && (<Text>{this.props.inputProfile.educations}</Text>) }
+                { !this.state.editedEducation && (<Text>{this.props.inputProfile.educations && this.props.inputProfile.educations.join()}</Text>) }
               </View>
               <Icon
                 name='edit'
@@ -126,14 +129,14 @@ class JobSeekerOwnProfile extends Component {
                 { this.state.editedSkills && (
                   <FormInput
                   onChangeText={(e) => this.changeForm(e, 'skills')}
-                  value={this.props.inputProfile.skills}
+                  value={this.props.inputProfile.skills && this.props.inputProfile.skills.join()}
                   onBlur={() => {
                     this.props.updateProfile(this.props.inputProfile, this.props.id)
                     this.setState( {editedSkills: false} )
                   }}
                   />)
                 }
-                { !this.state.editedSkills && (<Text>{this.props.inputProfile.skills}</Text>) }
+                { !this.state.editedSkills && (<Text>{this.props.inputProfile.skills && this.props.inputProfile.skills.join()}</Text>) }
               </View>
               <Icon
                 name='edit'
