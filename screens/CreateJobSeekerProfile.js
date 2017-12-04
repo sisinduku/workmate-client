@@ -124,7 +124,8 @@ const styles = {
     overflow: 'hidden',
     backgroundColor: 'transparent',
     color: 'rgb(166,255,203)',
-    fontSize: 16
+    fontSize: 16,
+    paddingBottom: 8
   },
   btn: {
     backgroundColor: 'transparent',

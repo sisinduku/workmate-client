@@ -3,7 +3,7 @@ import { AsyncStorage, StyleSheet, Text, View, Image } from 'react-native';
 import { Button, Slider, Divider, Card } from 'react-native-elements';
 
 import Background from './components/Background';
-import Logo from './../logo.png';
+import Logo from './../logo_transparent.png';
 
 
 export default class Home extends Component {
@@ -14,8 +14,8 @@ export default class Home extends Component {
         <Background/>
         <Image
           style={{
-            width: 128,
-            height: 128,
+            width: 164,
+            height: 164,
             alignSelf: 'center',
             marginBottom: 64
           }}
