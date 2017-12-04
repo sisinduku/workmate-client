@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {Text, View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { List, ListItem, Card, Button } from 'react-native-elements';
 
+import Loading from './Loading';
+
 const mapStateToProps = (state) => ({
   searchResult: state.EmployerReducer.searchResult
 });
@@ -10,7 +12,8 @@ const mapStateToProps = (state) => ({
 class JobSeekerList extends Component {
   render() {
     const { navigate } = this.props.navigation;
-    return (
+
+    const searchResults = () => (
       <FlatList
         style={ styles.container }
         data={this.props.searchResult}
@@ -32,6 +35,8 @@ class JobSeekerList extends Component {
         )}
       />
     );
+
+    return this.props.searchResult ? searchResults() : <Loading/>;
   }
 }
 
