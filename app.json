@@ -1,5 +1,12 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "name": "Workmate",
+    "sdkVersion": "23.0.0",
+    "icon": "./logo.png",
+    "version": "0.2",
+    "slug": "workmate",
+    "android": {
+      "package": "com.workmatebro.workmate"
+    }
   }
 }
