@@ -126,7 +126,7 @@ class SearchJobSeeker extends Component {
           </View>
         <ScrollView>
           <Card
-            title="PERSONALITY"
+            title="SEARCH BY PERSONALITY"
             containerStyle={ styles.mainCard }
             titleStyle={ styles.titleCard }
             dividerStyle={ styles.dividerCard }
@@ -154,7 +154,9 @@ class SearchJobSeeker extends Component {
 
           <Button
             buttonStyle={ styles.searchButton }
-            title='Search'
+            title='Start Search!'
+            color={'rgb(166,255,203)'}
+            fontSize={ 16 }
             onPress={ () => this._startSearch() }
             // onPress={() => navigate('JobSeekerList')}
           />
@@ -168,7 +170,9 @@ class SearchJobSeeker extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgb(0, 0, 0)',
-    flex: 1
+    flex: 1,
+    paddingTop: 24,
+    paddingBottom: 24
   },
   mainCard: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -199,7 +203,11 @@ const styles = StyleSheet.create({
     borderColor: '#fafafa',
     borderRadius: 200,
     marginTop: 16,
-    marginBottom: 48
+    marginBottom: 48,
+    marginLeft: 24,
+    marginRight: 24,
+    paddingTop: 12,
+    paddingBottom: 12
   }
 });
 

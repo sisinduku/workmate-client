@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { queryJobSeekersByPersonality} from './../graphql-client';
 
 export const setSearchResult = (searchResult) => ({
   type: 'SET_SEARCH_RESULT',
@@ -10,17 +10,23 @@ export const doneSearching = (bool) => ({
   payload: bool
 });
 
-export const getSearchResult = (criteria) => {
-  const URL = 'https://api-workmate.mepawz.com/search_personality/';
+export const setSearchedCriteria = (criteria) => ({
+  type: 'SET_SEARCHED_CRITERIA',
+  payload: criteria
+});
 
+export const getSearchResult = (criteria) => {
   return (dispatch, getState) => {
-    dispatch(doneSearching(false));
-    axios.post(URL, criteria)
-    .then(resp => {
-      dispatch(setSearchResult(resp.data))
-    })
-    .catch(err => {
-      throw err;
-    });
+    (async function (criteria) {
+      dispatch(doneSearching(false));
+      try {
+        const response = await queryJobSeekersByPersonality(criteria);
+        const jobSeekersByPersonality = [].concat(response.data.jobSeekersByPersonality).sort((a, b) => b.similarity - a.similarity);
+        dispatch(setSearchedCriteria(criteria));
+        dispatch(setSearchResult(jobSeekersByPersonality));
+      } catch (err) {
+        console.log(err);
+      }
+    })(criteria)
   }
 }

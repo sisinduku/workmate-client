@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
-import { Card, Slider, Badge } from 'react-native-elements';
+import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity} from 'react-native';
+import { Card, Slider, Badge, Button } from 'react-native-elements';
 
 const mapStateToProps = (state) => ({
-  searchResult: state.EmployerReducer.searchResult
+  searchResult: state.EmployerReducer.searchResult,
+  searchedCriteria: state.EmployerReducer.searchedCriteria
 });
 
 class JobSeekerProfile extends Component {
@@ -83,7 +84,12 @@ class JobSeekerProfile extends Component {
       />
     ));
 
-    const insight = JSON.parse(jobSeeker.jobSeeker.personality_insight)
+    const insight = JSON.parse(jobSeeker.jobSeeker.personality_insight);
+
+    const name = jobSeeker.jobSeeker.name.toUpperCase().split(' ');
+    const firstname = name[0];
+    const lastname = name.length > 1 ? name[1] : '';
+
     const personalities = insight.personality;
     const needs = insight.needs;
     const values = insight.values;
@@ -91,7 +97,7 @@ class JobSeekerProfile extends Component {
     const mainTraits = personalities.concat(needs).concat(values).map(p => ({
       trait_id: p.trait_id,
       name: p.name,
-      score: Math.round(p.percentile * 100)
+      score: Math.ceil(p.percentile * 100)
     }));
 
     const childTraits = personalities.concat(needs).concat(values).reduce((ct, p) => {
@@ -99,7 +105,7 @@ class JobSeekerProfile extends Component {
         const pcTraits = p.children.map(pc => ({
           trait_id: pc.trait_id,
           name: pc.name,
-          score: Math.round(pc.percentile * 100)
+          score: Math.ceil(pc.percentile * 100)
         }));
 
         ct = ct.concat(pcTraits);
@@ -124,8 +130,12 @@ class JobSeekerProfile extends Component {
     ];
     const traits = mainTraits.concat(childTraits)
     .filter(trait => dt.indexOf(trait.trait_id) !== -1)
+    .map(trait => {
+      trait.criteria = Math.ceil(this.props.searchedCriteria[trait.trait_id] * 100);
+      return trait;
+    })
     .map((trait, idx) => (
-      <View key={ idx }>
+      <View key={ idx } style={{ marginBottom: 16 }}>
         <Text style={ styles.traitTitle }>
           {`${trait.name.toUpperCase()}: `}
           <Text style={ styles.traitScore }>
@@ -134,18 +144,37 @@ class JobSeekerProfile extends Component {
             : String(trait.score).length === 2 ? ` ${String(trait.score)}%`
             : `${String(trait.score)}%`
           }
+          <Text style={{ color: '#fafafa' }}> / </Text>
+          <Text style={{ color: 'rgba(166,255,203, 0.4)'}}>
+            {trait.criteria}%
+          </Text>
           </Text>
         </Text>
         <Slider 
-          style={{flex: 1}}
+          style={{flex: 1, height: 10}}
           value={ trait.score }
           disabled={ true }
           minimumValue={0}
           maximumValue={100}
           trackStyle={ styles.sliderTrack }
           thumbStyle={ styles.sliderThumb }
+          thumbTouchSize={{ width: 0, height: 0 }}
           step={1}
           minimumTrackTintColor={'rgb(166,255,203)'}
+          maximumTrackTintColor={'rgba(255,255,255, 0)'}
+          thumbTintColor={'rgb(255, 255, 255)'}
+        />
+        <Slider 
+          style={{flex: 1, height: 10}}
+          value={ trait.criteria }
+          disabled={ true }
+          minimumValue={0}
+          maximumValue={100}
+          trackStyle={ styles.sliderTrack }
+          thumbStyle={ styles.sliderThumb }
+          thumbTouchSize={{ width: 0, height: 0 }}
+          step={1}
+          minimumTrackTintColor={'rgba(166,255,203, 0.2)'}
           maximumTrackTintColor={'rgba(255,255,255, 0)'}
           thumbTintColor={'rgb(255, 255, 255)'}
         />
@@ -159,9 +188,18 @@ class JobSeekerProfile extends Component {
             <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
           </View>
           <View style={ styles.jobSeekerWrapper }>
-            <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ jobSeeker.jobSeeker.name.toUpperCase() }</Text>
-            <Text style={{ fontSize: 9, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>{ jobSeeker.jobSeeker.location }</Text>
+            <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ firstname }<Text style={{ color: 'rgb(166,255,203)' }}> {lastname}</Text></Text>
+            <Text style={{ fontSize: 9, letterSpacing: 1.1, fontWeight: 'bold', color: 'rgb(18,216,250)' }}>{ jobSeeker.jobSeeker.location.toUpperCase() }, ID</Text>
           </View>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+          <Button 
+            title='SEND INVITATION'
+            buttonStyle={{padding: 4, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
+            fontSize={ 10 }
+            color={'rgb(166, 255, 203)'}
+            onPress={() => alert('Invitation Sent!')}
+          />
         </View>
 
         <View style={ styles.tabWrapper }>
@@ -237,6 +275,8 @@ class JobSeekerProfile extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 24,
+    paddingBottom: 24,
     paddingLeft: 24,
     paddingRight: 24,
     flex: 1,
@@ -312,6 +352,7 @@ const styles = StyleSheet.create({
     color: '#fafafa',
     letterSpacing: 1.6,
     fontSize: 10,
+    marginBottom: 8,
     fontWeight: 'bold',
     textAlign: 'left'
   },
@@ -323,6 +364,9 @@ const styles = StyleSheet.create({
     height: 0
   },
   sliderTrack: {
+    borderRadius: 0,
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
     height: 10
   }
 });

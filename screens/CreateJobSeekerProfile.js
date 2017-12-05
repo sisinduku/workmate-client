@@ -94,9 +94,9 @@ class CreateJobSeekerProfile extends Component {
               <FormInput onChangeText={(e) => this.changeProfile(e, 'executive_summary')} multiline={true} numberOfLines={1} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
               <Button
                 title='CREATE PROFILE'
+                color={'rgb(166,255,203)'}
                 onPress={() => { this.props.status && this.save(this.props.inputProfile)}}
                 buttonStyle={styles.btn}
-                icon={{name: 'send'}}
               />
             </ScrollView>
           </Card>
@@ -112,6 +112,8 @@ const styles = {
   container: {
     backgroundColor: 'rgb(0, 0, 0)',
     flex: 1,
+    paddingTop: 24,
+    paddingBottom: 24,
   },
   inputContainer: {
     flex: 1,
