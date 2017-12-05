@@ -2,9 +2,14 @@
   "expo": {
     "name": "Workmate",
     "sdkVersion": "23.0.0",
-    "icon": "./logo.png",
+    "icon": "./logo_transparent.png",
     "version": "0.3",
     "slug": "workmate",
+    "splash": {
+      "image": "./logo_transparent.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "android": {
       "package": "com.workmatebro.workmate"
     }
