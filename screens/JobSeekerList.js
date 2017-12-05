@@ -14,6 +14,7 @@ class JobSeekerList extends Component {
     const { navigate } = this.props.navigation;
 
     const searchResults = () => (
+      <View style={{flex: 1, backgroundColor: 'rgb(0, 0, 0)'}}>
       <FlatList
         style={ styles.container }
         data={this.props.searchResult}
@@ -34,30 +35,35 @@ class JobSeekerList extends Component {
           </TouchableOpacity>
         )}
       />
+      </View>
     );
 
-    return this.props.searchResult ? searchResults() : <Loading/>;
+    return this.props.searchResult ? searchResults()  : <Loading/>
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(0, 0, 0)',
-    paddingLeft: 24,
+    backgroundColor: 'transparent',
+    paddingLeft: 24, 
     paddingRight: 24,
+    marginTop: 24,
+    marginBottom: 24,
     flex: 1
   },
   listWrapper: {
     flex: 1,
     flexDirection: 'row',
-    borderRadius: 300,
-    marginTop: 16,
+    borderRadius: 500,
+    marginTop: 16
   },
   imageWrapper: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: 'transparent',
+    overflow: 'hidden'
   },
   image: {
     width: 64,
