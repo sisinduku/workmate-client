@@ -2,11 +2,11 @@
   "expo": {
     "name": "Workmate",
     "sdkVersion": "23.0.0",
-    "icon": "./logo_transparent.png",
+    "icon": "./logo_darkbg.png",
     "version": "0.3",
     "slug": "workmate",
     "splash": {
-      "image": "./logo_transparent.png",
+      "image": "./splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
