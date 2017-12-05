@@ -172,7 +172,7 @@ class JobSeekerProfile extends Component {
             : `${String(trait.score)}%`
           }
           <Text style={{ color: '#fafafa' }}> / </Text>
-          <Text style={{ color: 'rgba(166,255,203, 0.4)'}}>
+          <Text style={{ color: 'rgba(18,216,250, 0.4)'}}>
             {trait.criteria}%
           </Text>
           </Text>
@@ -201,7 +201,7 @@ class JobSeekerProfile extends Component {
           thumbStyle={ styles.sliderThumb }
           thumbTouchSize={{ width: 0, height: 0 }}
           step={1}
-          minimumTrackTintColor={'rgba(166,255,203, 0.2)'}
+          minimumTrackTintColor={'rgba(18,216,250, 0.4)'}
           maximumTrackTintColor={'rgba(255,255,255, 0)'}
           thumbTintColor={'rgb(255, 255, 255)'}
         />
@@ -253,6 +253,16 @@ class JobSeekerProfile extends Component {
               containerStyle={ styles.tabContainerCards }
               dividerStyle={ styles.tabContainerCardsDivider }
             >
+            <View style={{marginBottom: 16}}>
+              <View style={{flexDirection: 'row', marginBottom: 6}}>
+                <View style={{width: 16, height: 16, backgroundColor: 'rgb(166,255,203)', marginRight: 16, borderRadius: 16}}></View>
+                <Text style={{color: 'rgb(166,255,203)', letterSpacing: 1.6, fontSize: 10, fontWeight: 'bold'}}>Job Seeker's Personality</Text>
+              </View>
+              <View style={{flexDirection: 'row',  marginBottom: 6}}>
+                <View style={{width: 16, height: 16, backgroundColor: 'rgba(18,216,250, 0.4)', marginRight: 16, borderRadius: 16}}></View>
+                <Text style={{color: 'rgba(18,216,250, 0.4)',letterSpacing: 1.6, fontSize: 10, fontWeight: 'bold'}}>Searched Criteria</Text>
+              </View>
+            </View>
             { traits }
             </Card>
           </View>
