@@ -3,7 +3,7 @@
     "name": "Workmate",
     "sdkVersion": "23.0.0",
     "icon": "./logo.png",
-    "version": "0.2",
+    "version": "0.3",
     "slug": "workmate",
     "android": {
       "package": "com.workmatebro.workmate"
