@@ -23,7 +23,8 @@ export default class Home extends Component {
         />
         <Button
           buttonStyle={ styles.button }
-          title='JOB SEEKER'
+          title='CREATE PROFILE'
+          color={'rgb(166,255,203)'}
           onPress={async () => {
             try {
               const profile = await AsyncStorage.getItem('profile')
@@ -39,7 +40,8 @@ export default class Home extends Component {
         />
         <Button
           buttonStyle={ styles.button }
-          title='EMPLOYER'
+          title='SEARCH JOB SEEKER'
+          color={'rgb(166,255,203)'}
           onPress={() => navigate('SearchJobSeekers')}
         />
       </View>
@@ -52,6 +54,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
+    paddingTop: 24,
+    paddingBottom: 24,
   },
   button: {
     backgroundColor: 'transparent',
