@@ -16,7 +16,7 @@ class Loading extends Component {
         justifyContent: 'center',
         backgroundColor: '#000',
         alignItems: 'center'}}>
-        <ActivityIndicator size="large" color="#ccc" />
+        <ActivityIndicator size="large" color="rgb(166, 266, 203)" />
       </View>  
     )
   }

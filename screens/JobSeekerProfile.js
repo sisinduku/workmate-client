@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
 import { Card, Slider, Badge, Button } from 'react-native-elements';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   searchResult: state.EmployerReducer.searchResult,
-  searchedCriteria: state.EmployerReducer.searchedCriteria
+  searchedCriteria: state.EmployerReducer.searchedCriteria,
+  sendingEmail: false
 });
 
 class JobSeekerProfile extends Component {
@@ -44,13 +46,38 @@ class JobSeekerProfile extends Component {
     }
   }
 
+  _sendEmail(name, email) {
+    this.setState({
+      sendingEmail: true
+    });
+
+    const URL = 'https://api-workmate.mepawz.com/send_email';
+    const body = {
+      receiver_name: name,
+      receiver_email: email
+    }
+
+    axios.post(URL, body)
+    .then(resp => {
+      this.setState({
+        sendingEmail: false,
+      });
+      alert(`Invitation sent to\n${name}!`);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   render() {
     const deviceWidth = Dimensions.get('window').width;
     const deviceHeight = Dimensions.get('window').height;
+
     const jobSeeker = this.props.searchResult.find(item => item.jobSeeker._id == this.props.navigation.state.params._id);
 
-    const executive_summary = jobSeeker.jobSeeker.executive_summary.split('\n\n').map(sentence => sentence.replace('\n', ' '));
+    const email = jobSeeker.jobSeeker.email || 'munawirali@gmail.com';
 
+    const executive_summary = jobSeeker.jobSeeker.executive_summary.split('\n\n').map(sentence => sentence.replace('\n', ' '));
 
     const skills = jobSeeker.jobSeeker.skills.map((skill, idx) => (
       <Badge
@@ -87,8 +114,8 @@ class JobSeekerProfile extends Component {
     const insight = JSON.parse(jobSeeker.jobSeeker.personality_insight);
 
     const name = jobSeeker.jobSeeker.name.toUpperCase().split(' ');
-    const firstname = name[0];
-    const lastname = name.length > 1 ? name[1] : '';
+    const firstname = name.splice(0, 1);
+    const lastname = name.length > 0 ? name.join(' ') : '';
 
     const personalities = insight.personality;
     const needs = insight.needs;
@@ -181,6 +208,16 @@ class JobSeekerProfile extends Component {
       </View>
     ));
 
+    const sendEmailButton = () => (
+      <Button 
+        title='SEND INVITATION'
+        buttonStyle={{padding: 4, paddingLeft: 12, paddingRight: 12, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
+        fontSize={ 10 }
+        color={'rgb(166, 255, 203)'}
+        onPress={() => this._sendEmail(firstname.concat(lastname).join(' '), email)}
+      />
+    );
+
     return (
       <View style={ styles.container }>
         <View style={ styles.listWrapper }>
@@ -193,24 +230,18 @@ class JobSeekerProfile extends Component {
           </View>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <Button 
-            title='SEND INVITATION'
-            buttonStyle={{padding: 4, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
-            fontSize={ 10 }
-            color={'rgb(166, 255, 203)'}
-            onPress={() => alert('Invitation Sent!')}
-          />
+          { this.state.sendingEmail ? <ActivityIndicator size="small" color="rgb(166,255,203)" /> : sendEmailButton()}
         </View>
 
         <View style={ styles.tabWrapper }>
           <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('personality')}}>
-            <Text style={ styles.tabText }>PERSONALITY</Text>
+            <Text style={ this.state.isPersonalityTabOpen ? styles.tabTextOpened : styles.tabText}>PERSONALITY</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('summary')}}>
-            <Text style={ styles.tabText }>SUMMARY</Text>
+            <Text style={ this.state.isSummaryTabOpen ? styles.tabTextOpened : styles.tabText}>SUMMARY</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('informations')}}>
-            <Text style={ styles.tabText }>INFORMATIONS</Text>
+            <Text style={ this.state.isInformationsTabOpen ? styles.tabTextOpened : styles.tabText}>INFORMATIONS</Text>
           </TouchableOpacity>
         </View>
 
@@ -306,8 +337,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#fafafa'
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(166,255,203, 0.2)'
   },
   tab: {
     flex: 1,
@@ -316,6 +347,11 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: '#fafafa',
+    fontSize: 12,
+    textAlign: 'center'
+  },
+  tabTextOpened: {
+    color: 'rgba(166,255,203, 0.2)',
     fontSize: 12,
     textAlign: 'center'
   },
