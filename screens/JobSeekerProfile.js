@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity} from 'react-native';
 import { Card, Slider, Badge, Button } from 'react-native-elements';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   searchResult: state.EmployerReducer.searchResult,
@@ -44,13 +45,31 @@ class JobSeekerProfile extends Component {
     }
   }
 
+  _sendEmail(name, email) {
+    const URL = '/send_email';
+    const body = {
+      receiver_name: name,
+      receiver_email: email
+    }
+
+    console.log(body);
+    alert(`Invitation sent to\n${name}!`);
+    // axios.post(URL, {})
+    // .then(resp => {
+    //   alert('Invitation Sent!');
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
+  }
+
   render() {
     const deviceWidth = Dimensions.get('window').width;
     const deviceHeight = Dimensions.get('window').height;
+
     const jobSeeker = this.props.searchResult.find(item => item.jobSeeker._id == this.props.navigation.state.params._id);
 
     const executive_summary = jobSeeker.jobSeeker.executive_summary.split('\n\n').map(sentence => sentence.replace('\n', ' '));
-
 
     const skills = jobSeeker.jobSeeker.skills.map((skill, idx) => (
       <Badge
@@ -88,7 +107,7 @@ class JobSeekerProfile extends Component {
 
     const name = jobSeeker.jobSeeker.name.toUpperCase().split(' ');
     const firstname = name.splice(0, 1);
-    const lastname = name.length > 1 ? name.join(' ') : '';
+    const lastname = name.length > 0 ? name.join(' ') : '';
 
     const personalities = insight.personality;
     const needs = insight.needs;
@@ -195,22 +214,22 @@ class JobSeekerProfile extends Component {
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
           <Button 
             title='SEND INVITATION'
-            buttonStyle={{padding: 4, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
+            buttonStyle={{padding: 4, paddingLeft: 12, paddingRight: 12, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
             fontSize={ 10 }
             color={'rgb(166, 255, 203)'}
-            onPress={() => alert('Invitation Sent!')}
+            onPress={() => this._sendEmail(firstname.concat(lastname).join(' '), 'mail@wow.com')}
           />
         </View>
 
         <View style={ styles.tabWrapper }>
           <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('personality')}}>
-            <Text style={ styles.tabText }>PERSONALITY</Text>
+            <Text style={ this.state.isPersonalityTabOpen ? styles.tabTextOpened : styles.tabText}>PERSONALITY</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('summary')}}>
-            <Text style={ styles.tabText }>SUMMARY</Text>
+            <Text style={ this.state.isSummaryTabOpen ? styles.tabTextOpened : styles.tabText}>SUMMARY</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('informations')}}>
-            <Text style={ styles.tabText }>INFORMATIONS</Text>
+            <Text style={ this.state.isInformationsTabOpen ? styles.tabTextOpened : styles.tabText}>INFORMATIONS</Text>
           </TouchableOpacity>
         </View>
 
@@ -306,8 +325,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#fafafa'
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(166,255,203, 0.2)'
   },
   tab: {
     flex: 1,
@@ -316,6 +335,11 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: '#fafafa',
+    fontSize: 12,
+    textAlign: 'center'
+  },
+  tabTextOpened: {
+    color: 'rgba(166,255,203, 0.2)',
     fontSize: 12,
     textAlign: 'center'
   },

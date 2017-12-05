@@ -119,10 +119,10 @@ class SearchJobSeeker extends Component {
     return (
       <View style={ styles.container }>
           <View
-            style={ this.state.isSnackbarOpen ? {display: 'flex', padding: 16, margin: 8, borderWidth: 1, borderColor: '#fff', width: Dimensions.get('window').width - 16, position: 'absolute', top: 0, left: 0, zIndex: 999, backgroundColor: '#000', borderRadius: 3} : {display: 'none', position: 'absolute', top: 0, left: 0}}
+            style={ this.state.isSnackbarOpen ? styles.openSnackbar : styles.closedSnackbar }
           >
-            <Text style={{color: '#fff', fontSize: 12}}>{ this.state.snackbarTitle.toUpperCase() }</Text>
-            <Text style={{color: '#fff', fontSize: 10}}>{ this.state.snackbarMessage }</Text>
+            <Text style={{color: 'rgb(18,216,250)', fontSize: 12, fontWeight: 'bold', letterSpacing: 2}}>{ this.state.snackbarTitle.toUpperCase() }</Text>
+            <Text style={{color: 'rgb(166,255,203)', fontSize: 12}}>{ this.state.snackbarMessage }</Text>
           </View>
         <ScrollView>
           <Card
@@ -173,6 +173,25 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 24,
     paddingBottom: 24
+  },
+  openSnackbar: {
+    display: 'flex',
+    padding: 24,
+    paddingTop: 48,
+    borderBottomWidth: 3,
+    borderBottomColor: 'rgb(18,216,250)', //'rgb(166,255,203)', 
+    width: Dimensions.get('window').width, 
+    position: 'absolute', 
+    top: 0, 
+    left: 0, 
+    zIndex: 999, 
+    backgroundColor: 'rgba(0, 0, 0, 0.92)',
+  },
+  closedSnackbar: {
+    display: 'none',
+    position: 'absolute',
+    top: 0,
+    left: 0
   },
   mainCard: {
     backgroundColor: 'rgba(255, 255, 255, 0)',

@@ -120,7 +120,7 @@ class JobSeekerOwnProfile extends Component {
 
     const name = this.props.inputProfile.name.toUpperCase().split(' ');
     const firstname = name.splice(0, 1);
-    const lastname = name.length > 1 ? name.join(' ') : '';
+    const lastname = name.length > 0 ? name.join(' ') : '';
 
     return (
       <View style={ styles.container }>
@@ -135,13 +135,13 @@ class JobSeekerOwnProfile extends Component {
         </View>
 
         <View style={ styles.tabWrapper }>
-          <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('summary')}}>
+          <TouchableOpacity style={ this.state.isSummaryTabOpen ? styles.tabTextOpened : styles.tabText} onPress={() => {this._openTab('summary')}}>
             <Text style={ styles.tabText }>SUMMARY</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('informations')}}>
+          <TouchableOpacity style={ this.state.isInformationsTabOpen ? styles.tabTextOpened : styles.tabText} onPress={() => {this._openTab('informations')}}>
             <Text style={ styles.tabText }>INFORMATIONS</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('personality')}}>
+          <TouchableOpacity style={ this.state.isPersonalityTabOpen ? styles.tabTextOpened : styles.tabText } onPress={() => {this._openTab('personality')}}>
             <Text style={ styles.tabText }>LOG OUT</Text>
           </TouchableOpacity>
         </View>
@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderBottomWidth: 0.5,
-    borderBottomColor: '#fafafa'
+    borderBottomColor: 'rgba(166,255,203, 0.2)'
   },
   tab: {
     flex: 1,
