@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
 import { Card, Slider, Badge, Button } from 'react-native-elements';
 import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   searchResult: state.EmployerReducer.searchResult,
-  searchedCriteria: state.EmployerReducer.searchedCriteria
+  searchedCriteria: state.EmployerReducer.searchedCriteria,
+  sendingEmail: false
 });
 
 class JobSeekerProfile extends Component {
@@ -46,21 +47,26 @@ class JobSeekerProfile extends Component {
   }
 
   _sendEmail(name, email) {
-    const URL = '/send_email';
+    this.setState({
+      sendingEmail: true
+    });
+
+    const URL = 'https://api-workmate.mepawz.com/send_email';
     const body = {
       receiver_name: name,
       receiver_email: email
     }
 
-    console.log(body);
-    alert(`Invitation sent to\n${name}!`);
-    // axios.post(URL, {})
-    // .then(resp => {
-    //   alert('Invitation Sent!');
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // });
+    axios.post(URL, body)
+    .then(resp => {
+      this.setState({
+        sendingEmail: false,
+      });
+      alert(`Invitation sent to\n${name}!`);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   render() {
@@ -68,6 +74,8 @@ class JobSeekerProfile extends Component {
     const deviceHeight = Dimensions.get('window').height;
 
     const jobSeeker = this.props.searchResult.find(item => item.jobSeeker._id == this.props.navigation.state.params._id);
+
+    const email = jobSeeker.jobSeeker.email || 'munawirali@gmail.com';
 
     const executive_summary = jobSeeker.jobSeeker.executive_summary.split('\n\n').map(sentence => sentence.replace('\n', ' '));
 
@@ -200,6 +208,16 @@ class JobSeekerProfile extends Component {
       </View>
     ));
 
+    const sendEmailButton = () => (
+      <Button 
+        title='SEND INVITATION'
+        buttonStyle={{padding: 4, paddingLeft: 12, paddingRight: 12, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
+        fontSize={ 10 }
+        color={'rgb(166, 255, 203)'}
+        onPress={() => this._sendEmail(firstname.concat(lastname).join(' '), email)}
+      />
+    );
+
     return (
       <View style={ styles.container }>
         <View style={ styles.listWrapper }>
@@ -212,13 +230,7 @@ class JobSeekerProfile extends Component {
           </View>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <Button 
-            title='SEND INVITATION'
-            buttonStyle={{padding: 4, paddingLeft: 12, paddingRight: 12, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
-            fontSize={ 10 }
-            color={'rgb(166, 255, 203)'}
-            onPress={() => this._sendEmail(firstname.concat(lastname).join(' '), 'mail@wow.com')}
-          />
+          { this.state.sendingEmail ? <ActivityIndicator size="small" color="rgb(166,255,203)" /> : sendEmailButton()}
         </View>
 
         <View style={ styles.tabWrapper }>
