@@ -118,6 +118,10 @@ class JobSeekerOwnProfile extends Component {
 
     const executive_summary = this.props.inputProfile.executive_summary.split('\n').map(sentence => sentence.replace('\n', ' '));
 
+    const name = this.props.inputProfile.name.toUpperCase().split(' ');
+    const firstname = name.splice(0, 1);
+    const lastname = name.length > 1 ? name.join(' ') : '';
+
     return (
       <View style={ styles.container }>
         <View style={ styles.listWrapper }>
@@ -125,8 +129,8 @@ class JobSeekerOwnProfile extends Component {
             <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
           </View>
           <View style={ styles.jobSeekerWrapper }>
-            <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ this.props.inputProfile.name }</Text>
-            <Text style={{ fontSize: 9, letterSpacing: 1.1, fontWeight: 'bold', color: '#cdcdcd' }}>{ this.props.inputProfile.location }</Text>
+            <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ firstname } <Text style={{ color: 'rgb(166,255,203)' }}> {lastname}</Text></Text>
+            <Text style={{ fontSize: 9, letterSpacing: 1.1, fontWeight: 'bold', color: 'rgb(18,216,250)' }}>{ this.props.inputProfile.location.toUpperCase() }</Text>
           </View>
         </View>
 

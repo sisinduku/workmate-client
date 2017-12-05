@@ -10,7 +10,8 @@ import {
   Dimensions,
   Modal,
   ActivityIndicator,
-  AsyncStorage
+  AsyncStorage,
+  KeyboardAvoidingView
 } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { connect } from 'react-redux'
@@ -64,60 +65,38 @@ class CreateJobSeekerProfile extends Component {
   render () {
     const { navigate } = this.props.navigation
     return (
-      <KeyboardAwareScrollView
-          enableOnAndroid={true}
-          enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-          style={ styles.container }
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={styles.container}
-          scrollEnabled={true}
-        >
-    
-          <Card
-            title='CREATE PROFILE'
-            titleStyle={ styles.titleCard }
-            containerStyle={{backgroundColor: 'transparent', borderWidth: 0}}
-            dividerStyle={{height: 0}}
-          >
-            <ScrollView>
-              <FormLabel labelStyle={styles.label}>NAME</FormLabel>
-              <FormInput onChangeText={(e) => this.changeProfile(e, 'name')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
-              <FormLabel labelStyle={styles.label}>LOCATION</FormLabel>
-              <FormInput onChangeText={(e) => this.changeProfile(e, 'location')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
-              <FormLabel labelStyle={styles.label}>EDUCATIONS</FormLabel>
-              <FormInput 
-                onChangeText={(e) => this.changeProfile(e, 'education')}
-                inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
-              <FormLabel labelStyle={styles.label}>SKILLS</FormLabel>
-              <FormInput onChangeText={(e) => this.changeProfile(e, 'skills')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
-              <FormLabel labelStyle={styles.label}>SUMMARY</FormLabel>
-              <FormInput onChangeText={(e) => this.changeProfile(e, 'executive_summary')} multiline={true} numberOfLines={1} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
-              <Button
-                title='CREATE PROFILE'
-                color={'rgb(166,255,203)'}
-                onPress={() => { this.props.status && this.save(this.props.inputProfile)}}
-                buttonStyle={styles.btn}
-              />
-            </ScrollView>
-          </Card>
-          
-        </KeyboardAwareScrollView>
-    )
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={{flex: 1, padding: 24, backgroundColor: '#000'}}
+      >
+      <ScrollView>
+        <Text style={{ color:'#fafafa', textAlign: 'center', marginTop: 24, marginBottom: 24, fontSize: 12, fontWeight: 'bold', letterSpacing: 1.5 }}>CREATE PROFILE</Text>
+        <FormLabel labelStyle={styles.label}>NAME</FormLabel>
+        <FormInput onChangeText={(e) => this.changeProfile(e, 'name')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
+
+        <FormLabel labelStyle={styles.label}>LOCATION</FormLabel>
+        <FormInput onChangeText={(e) => this.changeProfile(e, 'location')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
+
+        <FormLabel labelStyle={styles.label}>EDUCATIONS</FormLabel>
+        <FormInput onChangeText={(e) => this.changeProfile(e, 'education')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
+
+        <FormLabel labelStyle={styles.label}>SKILLS</FormLabel>
+        <FormInput onChangeText={(e) => this.changeProfile(e, 'skills')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
+
+        <FormLabel labelStyle={styles.label}>SUMMARY</FormLabel>
+        <FormInput onChangeText={(e) => this.changeProfile(e, 'executive_summary')} multiline={true} numberOfLines={1} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
+        
+        <Button title='CREATE PROFILE' color={'rgb(166,255,203)'} onPress={() => { this.props.status && this.save(this.props.inputProfile)}} buttonStyle={styles.btn}/>
+      </ScrollView>
+      </KeyboardAvoidingView>
+    );
   }
 }
 
 const deviceWidth = Dimensions.get('window').width;
 
 const styles = {
-  container: {
-    backgroundColor: 'rgb(0, 0, 0)',
-    flex: 1,
-    paddingTop: 24,
-    paddingBottom: 24,
-  },
   inputContainer: {
-    flex: 1,
-    backgroundColor: 'rgb(0, 0, 0)',
     overflow: 'hidden'
   },
   input: {
@@ -127,7 +106,10 @@ const styles = {
     backgroundColor: 'transparent',
     color: 'rgb(166,255,203)',
     fontSize: 16,
-    paddingBottom: 8
+    padding: 4,
+    paddingBottom: 8,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#222',
   },
   btn: {
     backgroundColor: 'transparent',

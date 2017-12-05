@@ -87,8 +87,8 @@ class JobSeekerProfile extends Component {
     const insight = JSON.parse(jobSeeker.jobSeeker.personality_insight);
 
     const name = jobSeeker.jobSeeker.name.toUpperCase().split(' ');
-    const firstname = name[0];
-    const lastname = name.length > 1 ? name[1] : '';
+    const firstname = name.splice(0, 1);
+    const lastname = name.length > 1 ? name.join(' ') : '';
 
     const personalities = insight.personality;
     const needs = insight.needs;
