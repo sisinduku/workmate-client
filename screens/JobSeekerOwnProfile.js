@@ -135,14 +135,14 @@ class JobSeekerOwnProfile extends Component {
         </View>
 
         <View style={ styles.tabWrapper }>
-          <TouchableOpacity style={ this.state.isSummaryTabOpen ? styles.tabTextOpened : styles.tabText} onPress={() => {this._openTab('summary')}}>
-            <Text style={ styles.tabText }>SUMMARY</Text>
+          <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('summary')}}>
+            <Text style={ this.state.isSummaryTabOpen ? styles.tabTextOpened : styles.tabText }>SUMMARY</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={ this.state.isInformationsTabOpen ? styles.tabTextOpened : styles.tabText} onPress={() => {this._openTab('informations')}}>
-            <Text style={ styles.tabText }>INFORMATIONS</Text>
+          <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('informations')}}>
+            <Text style={ this.state.isInformationsTabOpen ? styles.tabTextOpened : styles.tabText }>INFORMATIONS</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={ this.state.isPersonalityTabOpen ? styles.tabTextOpened : styles.tabText } onPress={() => {this._openTab('personality')}}>
-            <Text style={ styles.tabText }>LOG OUT</Text>
+          <TouchableOpacity style={ styles.tab } onPress={() => {this._openTab('personality')}}>
+            <Text style={ this.state.isPersonalityTabOpen ? styles.tabTextOpened : styles.tabText }>LOG OUT</Text>
           </TouchableOpacity>
         </View>
 
@@ -153,7 +153,7 @@ class JobSeekerOwnProfile extends Component {
               dividerStyle={ styles.tabContainerCardsDivider }
             >
             <TouchableOpacity style={{ flex: 1, borderWidth: 1, borderColor: '#fafafa', borderRadius: 100, paddingTop: 12, paddingBottom: 12 }} onPress={() => {this.logout()}}>
-              <Text style={{ color: '#fafafa', textAlign: 'center', fontSize: 16, letterSpacing: 1.2 }}>LOG OUT</Text>
+              <Text style={{ color: 'rgb(166,255,203)', textAlign: 'center', fontSize: 14, letterSpacing: 1.2 }}>LOG OUT</Text>
             </TouchableOpacity>
             </Card>
           </View>
@@ -202,140 +202,6 @@ class JobSeekerOwnProfile extends Component {
         </ScrollView>
       </View>
     );
-    // return (
-    //   <KeyboardAwareScrollView
-    //   enableOnAndroid={true}
-    //   enableAutoAutomaticScroll={(Platform.OS === 'ios')}
-    //   style={{ backgroundColor: '#4c69a5' }}
-    //   resetScrollToCoords={{ x: 0, y: 0 }}
-    //   contentContainerStyle={styles.container}
-    //   scrollEnabled={true}
-    // >
-    //   <ScrollView style={styles.container}>
-    //     <Card title={this.props.inputProfile.name}>
-    //       <Avatar
-    //         xlarge
-    //         rounded
-    //         source={{uri: "http://www.texasrevs.com/wp-content/uploads/2016/10/dummy-image.jpg"}}
-    //         containerStyle={{alignSelf: 'center'}}
-    //       />
-    //     </Card>
-    //     <Card title="Name">
-    //       <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    //           <View>
-    //             { this.state.editedName && (
-    //               <FormInput
-    //                 onChangeText={(e) => this.changeForm(e, 'name')}
-    //                 value={this.props.inputProfile.name}
-    //                 onBlur={() => {
-    //                   this.props.updateProfile(this.props.inputProfile, this.props.id)
-    //                   this.setState({editedName: false})
-    //                 }}
-    //               />)
-    //             }
-    //             { !this.state.editedName && (<Text>{this.props.inputProfile.name}</Text>) }
-    //           </View>
-    //           <Icon
-    //             iconStyle={{color: '#ccc'}}
-    //             name='edit'
-    //             onPress={() => { this.setState({editedName: true})}}
-    //           />
-    //         </View>
-    //       </Card>
-
-    //       <Card title="Education">
-    //         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    //           <View>
-    //             { this.state.editedEducation && (
-    //               <FormInput
-    //                 onChangeText={(e) => this.changeForm(e, 'education')}
-    //                 value={this.props.inputProfile.education}
-    //                 onBlur={() => {
-    //                   this.props.updateProfile(this.props.inputProfile, this.props.id)
-    //                   this.setState( {editedEducation: false} )
-    //                 }}
-    //               />)
-    //             }
-    //             { !this.state.editedEducation && (<Text>{this.props.inputProfile.educations}</Text>) }
-    //           </View>
-    //           <Icon
-    //             name='edit'
-    //             iconStyle={{color: '#ccc'}}
-    //             onPress={() => { this.setState({editedEducation: true})}}
-    //           />
-    //         </View>
-    //       </Card>
-
-    //       <Card title="Skills">
-    //         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    //           <View>
-    //             { this.state.editedSkills && (
-    //               <FormInput
-    //               onChangeText={(e) => this.changeForm(e, 'skills')}
-    //               value={this.props.inputProfile.skills}
-    //               onBlur={() => {
-    //                 this.props.updateProfile(this.props.inputProfile, this.props.id)
-    //                 this.setState( {editedSkills: false} )
-    //               }}
-    //               />)
-    //             }
-    //             { !this.state.editedSkills && (<Text>{this.props.inputProfile.skills}</Text>) }
-    //           </View>
-    //           <Icon
-    //             name='edit'
-    //             iconStyle={{color: '#ccc'}}
-    //             onPress={() => { this.setState({editedSkills: true})}}
-    //           />
-    //         </View>
-    //       </Card>
-
-    //       <Card title="Location">
-    //         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    //           <View>
-    //             { this.state.editedLocation && (
-    //               <FormInput
-    //               onChangeText={(e) => this.changeForm(e, 'location')}
-    //               value={this.props.inputProfile.location}
-    //               onBlur={() => {
-    //                 this.props.updateProfile(this.props.inputProfile, this.props.id)
-    //                 this.setState( {editedLocation: false} )
-    //               }}
-    //               />)
-    //             }
-    //             { !this.state.editedLocation && (<Text>{this.props.inputProfile.location}</Text>) }
-    //           </View>
-    //           <Icon
-    //             iconStyle={{color: '#ccc'}}
-    //             name='edit' onPress={() => { this.setState({editedLocation: true})}}
-    //           />
-    //         </View>
-    //       </Card>
-
-    //       <Card title="Executive Summary">
-    //         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    //           <View>
-    //             { this.state.editedSummary && (
-    //               <FormInput
-    //                 value={this.props.inputProfile.executive_summary}
-    //                 onBlur={() => {
-    //                   this.props.updateProfile(this.props.inputProfile, this.props.id)
-    //                   this.setState( {editedLocation: false} )
-    //                 }}
-    //               />)
-    //             }
-    //             { !this.state.editedSummary && (<Text>{this.props.inputProfile.executive_summary}</Text>) }
-    //           </View>
-    //           <Icon
-    //             iconStyle={{color: '#ccc'}}
-    //             name='edit' onPress={() => { this.setState({editedSummary: true})}}
-    //           />
-    //         </View>
-    //       </Card>
-    //       <Button onPress={() => this.logout()} title="LOGOUT" />
-    //       <View style={{height:20}}/>
-    //     </ScrollView>
-    //   </KeyboardAwareScrollView>
-    // );
   }
 }
 
@@ -430,7 +296,12 @@ const styles = StyleSheet.create({
   },
   sliderTrack: {
     height: 10
-  }
+  },
+  tabTextOpened: {
+    color: 'rgba(166,255,203, 0.2)',
+    fontSize: 12,
+    textAlign: 'center'
+  },
 });
 
 const mapDispatch = (dispatch) => {
