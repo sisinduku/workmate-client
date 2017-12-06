@@ -22,7 +22,7 @@ class JobSeekerList extends Component {
         renderItem={({ item }) => (
           <TouchableOpacity style={ styles.listWrapper } onPress={() => navigate('JobSeekerProfile', { _id: item.jobSeeker._id }) }>
             <View style={ styles.imageWrapper }>
-              <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
+              <Image style={ styles.image } source={{ uri: item.avatarURI }}/>
             </View>
             <View style={ styles.jobSeekerWrapper }>
               <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ item.jobSeeker.name.toUpperCase() }</Text>

@@ -22,8 +22,11 @@ export const getSearchResult = (criteria) => {
       try {
         const response = await queryJobSeekersByPersonality(criteria);
         const jobSeekersByPersonality = [].concat(response.data.jobSeekersByPersonality).sort((a, b) => b.similarity - a.similarity);
+        const jobSeekersByPersonalityWithAvatar = jobSeekersByPersonality.map(js => {
+          return {...js, avatarURI: `https://api.adorable.io/avatars/285/${js.jobSeeker._id}`}
+        });
         dispatch(setSearchedCriteria(criteria));
-        dispatch(setSearchResult(jobSeekersByPersonality));
+        dispatch(setSearchResult(jobSeekersByPersonalityWithAvatar));
       } catch (err) {
         console.log(err);
       }
