@@ -134,6 +134,8 @@ class JobSeekerProfile extends Component {
     const firstname = name.splice(0, 1);
     const lastname = name.length > 0 ? name.join(' ') : '';
 
+    const avatar = jobSeeker.avatarURI;
+
     const personalities = insight.personality;
     const needs = insight.needs;
     const values = insight.values;
@@ -239,7 +241,7 @@ class JobSeekerProfile extends Component {
       <View style={ styles.container }>
         <View style={ styles.listWrapper }>
           <View style={ styles.imageWrapper }>
-            <Image style={ styles.image } source={{uri: 'https://api.adorable.io/avatars/285/abott@adorable.png'}}/>
+            <Image style={ styles.image } source={{uri: avatar}}/>
           </View>
           <View style={ styles.jobSeekerWrapper }>
             <Text style={{ fontSize: 12, letterSpacing: 1.1, fontWeight: 'bold', color: '#fafafa' }}>{ firstname }<Text style={{ color: 'rgb(166,255,203)' }}> {lastname}</Text></Text>
