@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
+import { AlertIOS, Platform, ToastAndroid, StyleSheet, Text, View, ScrollView, Dimensions, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
 import { Card, Slider, Badge, Button } from 'react-native-elements';
 import axios from 'axios';
 
@@ -62,10 +62,24 @@ class JobSeekerProfile extends Component {
       this.setState({
         sendingEmail: false,
       });
-      alert(`Invitation sent to\n${name}!`);
+      if (Platform.OS === 'android') {
+        ToastAndroid.show(`Email sent to ${name}`, ToastAndroid.SHORT);
+      } else {
+        AlertIOS.alert(
+         `Email sent to ${name}`
+        );
+      }
+      
     })
     .catch(err => {
-      console.log(err);
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Error sending email', ToastAndroid.SHORT);
+      } else {
+        AlertIOS.alert(
+         `Error sending email`
+        );
+      }
+      
     });
   }
 
@@ -178,7 +192,7 @@ class JobSeekerProfile extends Component {
           </Text>
         </Text>
         <Slider 
-          style={{flex: 1, height: 10}}
+          style={{flex: 1, height: 12}}
           value={ trait.score }
           disabled={ true }
           minimumValue={0}
@@ -192,7 +206,7 @@ class JobSeekerProfile extends Component {
           thumbTintColor={'rgb(255, 255, 255)'}
         />
         <Slider 
-          style={{flex: 1, height: 10}}
+          style={{flex: 1, height: 12}}
           value={ trait.criteria }
           disabled={ true }
           minimumValue={0}
@@ -212,7 +226,7 @@ class JobSeekerProfile extends Component {
       <Button 
         title='SEND INVITATION'
         buttonStyle={{padding: 4, paddingLeft: 12, paddingRight: 12, borderRadius: 100, backgroundColor: 'transparent', borderColor: 'rgb(166, 266, 203)', borderWidth: 1}}
-        fontSize={ 10 }
+        fontSize={ 12 }
         color={'rgb(166, 255, 203)'}
         onPress={() => this._sendEmail(firstname.concat(lastname).join(' '), email)}
       />
@@ -256,11 +270,11 @@ class JobSeekerProfile extends Component {
             <View style={{marginBottom: 16}}>
               <View style={{flexDirection: 'row', marginBottom: 6}}>
                 <View style={{width: 16, height: 16, backgroundColor: 'rgb(166,255,203)', marginRight: 16, borderRadius: 16}}></View>
-                <Text style={{color: 'rgb(166,255,203)', letterSpacing: 1.6, fontSize: 10, fontWeight: 'bold'}}>Job Seeker's Personality</Text>
+                <Text style={{color: 'rgb(166,255,203)', letterSpacing: 1.6, fontSize: 12, fontWeight: 'bold'}}>Job Seeker's Personality</Text>
               </View>
               <View style={{flexDirection: 'row',  marginBottom: 6}}>
                 <View style={{width: 16, height: 16, backgroundColor: 'rgba(18,216,250, 0.4)', marginRight: 16, borderRadius: 16}}></View>
-                <Text style={{color: 'rgba(18,216,250, 0.4)',letterSpacing: 1.6, fontSize: 10, fontWeight: 'bold'}}>Searched Criteria</Text>
+                <Text style={{color: 'rgba(18,216,250, 0.4)',letterSpacing: 1.6, fontSize: 12, fontWeight: 'bold'}}>Searched Criteria</Text>
               </View>
             </View>
             { traits }
@@ -396,8 +410,8 @@ const styles = StyleSheet.create({
   },
   traitTitle: {
     color: '#fafafa',
-    letterSpacing: 1.6,
-    fontSize: 10,
+    letterSpacing: 1.2,
+    fontSize: 11,
     marginBottom: 8,
     fontWeight: 'bold',
     textAlign: 'left'
@@ -413,7 +427,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     borderTopRightRadius: 100,
     borderBottomRightRadius: 100,
-    height: 10
+    height: 12
   }
 });
 

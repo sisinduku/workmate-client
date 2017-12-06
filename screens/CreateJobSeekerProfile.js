@@ -50,14 +50,20 @@ class CreateJobSeekerProfile extends Component {
     else if(key == 'skills') {
       this.props.inputProfile.skills = e.split(',')
     }
+    else if(key == 'email') {
+      this.props.inputProfile.email = e
+    }
     else {
       this.props.inputProfile[key] = e
     }
+
     this.setState(this.props.inputProfile)
+
     if(
       this.props.inputProfile.name != '' &&
       this.props.inputProfile.location != '' &&
       this.props.inputProfile.education != '' &&
+      this.props.inputProfile.email != '' &&
       this.props.inputProfile.executive_summary != '' &&
       this.props.inputProfile.skills != ''
     ) this.props.setSubmit(true)
@@ -73,6 +79,9 @@ class CreateJobSeekerProfile extends Component {
         <Text style={{ color:'#fafafa', textAlign: 'center', marginTop: 24, marginBottom: 24, fontSize: 12, fontWeight: 'bold', letterSpacing: 1.5 }}>CREATE PROFILE</Text>
         <FormLabel labelStyle={styles.label}>NAME</FormLabel>
         <FormInput onChangeText={(e) => this.changeProfile(e, 'name')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
+
+        <FormLabel labelStyle={styles.label}>EMAIL</FormLabel>
+        <FormInput onChangeText={(e) => this.changeProfile(e, 'email')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
 
         <FormLabel labelStyle={styles.label}>LOCATION</FormLabel>
         <FormInput onChangeText={(e) => this.changeProfile(e, 'location')} inputStyle={styles.input} containerStyle={ styles.inputContainer }/>
