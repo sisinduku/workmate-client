@@ -238,8 +238,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'rgba(166,255,203, 0.2)'
+    borderBottomWidth: 2.5,
+    borderBottomColor: 'rgba(166,255,203, 0.9)'
   },
   tab: {
     flex: 1,
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     height: 10
   },
   tabTextOpened: {
-    color: 'rgba(166,255,203, 0.2)',
+    color: 'rgba(166,255,203, 0.9)',
     fontSize: 12,
     textAlign: 'center'
   },
