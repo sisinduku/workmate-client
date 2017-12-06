@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingTop: 48,
     borderBottomWidth: 3,
-    borderBottomColor: 'rgb(18,216,250)', //'rgb(166,255,203)', 
+    borderBottomColor: '#222', //'rgb(166,255,203)', 
     width: Dimensions.get('window').width, 
     position: 'absolute', 
     top: 0, 

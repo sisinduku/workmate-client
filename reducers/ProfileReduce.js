@@ -11,6 +11,7 @@ import {
 const profileState = {
   inputProfile: {
     name: '',
+    email: '',
     location: '',
     educations: [],
     skills: [],
