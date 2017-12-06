@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     padding: 24,
     paddingTop: 48,
-    borderBottomWidth: 3,
+    borderBottomWidth: 5,
     borderBottomColor: '#222', //'rgb(166,255,203)', 
     width: Dimensions.get('window').width, 
     position: 'absolute', 
