@@ -99,7 +99,9 @@ class SearchJobSeeker extends Component {
           </Text>
         </Text>
         <Slider 
-          style={{flex: 1}}
+          style={{flex: 1, marginTop: 12, marginBottom: 18}}
+          thumbStyle={{width: 25, height: 25, borderRadius: 25}}
+          trackStyle={{ height: 8, borderRadius: 8 }}
           value={ trait.score }
           minimumValue={0}
           maximumValue={100}
@@ -141,7 +143,7 @@ class SearchJobSeeker extends Component {
               cancelTextStyle={{color: '#fafafa'}}
               backdropPressToClose={true}
               data={ presetPersonalities }
-              initValue="Preset Personalities"
+              initValue="PRESET PERSONALITIES"
               onChange={(option)=>{ this._setToPresetPersonality(option.label.toLowerCase().replace(/\s/g, '_')) }} />
           </Card>
 
@@ -154,11 +156,10 @@ class SearchJobSeeker extends Component {
 
           <Button
             buttonStyle={ styles.searchButton }
-            title='Start Search!'
+            title='START SEARCH'
             color={'rgb(166,255,203)'}
             fontSize={ 16 }
             onPress={ () => this._startSearch() }
-            // onPress={() => navigate('JobSeekerList')}
           />
 
         </ScrollView>
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
   traitTitle: {
     color: '#fafafa',
     letterSpacing: 1.6,
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'left'
   },

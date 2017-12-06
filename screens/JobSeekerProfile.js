@@ -63,7 +63,7 @@ class JobSeekerProfile extends Component {
         sendingEmail: false,
       });
       if (Platform.OS === 'android') {
-        ToastAndroid.show(`Email sent to ${name}`, ToastAndroid.SHORT);
+        ToastAndroid.show(`Email sent to ${name}`, ToastAndroid.TOP, ToastAndroid.LONG);
       } else {
         AlertIOS.alert(
          `Email sent to ${name}`
@@ -72,8 +72,11 @@ class JobSeekerProfile extends Component {
       
     })
     .catch(err => {
+      this.setState({
+        sendingEmail: false,
+      });
       if (Platform.OS === 'android') {
-        ToastAndroid.show('Error sending email', ToastAndroid.SHORT);
+        ToastAndroid.show('Error sending email', ToastAndroid.TOP, ToastAndroid.LONG);
       } else {
         AlertIOS.alert(
          `Error sending email`
@@ -186,7 +189,7 @@ class JobSeekerProfile extends Component {
             : `${String(trait.score)}%`
           }
           <Text style={{ color: '#fafafa' }}> / </Text>
-          <Text style={{ color: 'rgba(18,216,250, 0.4)'}}>
+          <Text style={{ color: 'rgba(18,216,250, 1)'}}>
             {trait.criteria}%
           </Text>
           </Text>
@@ -215,7 +218,7 @@ class JobSeekerProfile extends Component {
           thumbStyle={ styles.sliderThumb }
           thumbTouchSize={{ width: 0, height: 0 }}
           step={1}
-          minimumTrackTintColor={'rgba(18,216,250, 0.4)'}
+          minimumTrackTintColor={'rgba(18,216,250, 0.8)'}
           maximumTrackTintColor={'rgba(255,255,255, 0)'}
           thumbTintColor={'rgb(255, 255, 255)'}
         />
@@ -273,8 +276,8 @@ class JobSeekerProfile extends Component {
                 <Text style={{color: 'rgb(166,255,203)', letterSpacing: 1.6, fontSize: 12, fontWeight: 'bold'}}>Job Seeker's Personality</Text>
               </View>
               <View style={{flexDirection: 'row',  marginBottom: 6}}>
-                <View style={{width: 16, height: 16, backgroundColor: 'rgba(18,216,250, 0.4)', marginRight: 16, borderRadius: 16}}></View>
-                <Text style={{color: 'rgba(18,216,250, 0.4)',letterSpacing: 1.6, fontSize: 12, fontWeight: 'bold'}}>Searched Criteria</Text>
+                <View style={{width: 16, height: 16, backgroundColor: 'rgba(18,216,250, 0.8)', marginRight: 16, borderRadius: 16}}></View>
+                <Text style={{color: 'rgba(18,216,250, 0.8)',letterSpacing: 1.6, fontSize: 12, fontWeight: 'bold'}}>Searched Criteria</Text>
               </View>
             </View>
             { traits }
@@ -361,8 +364,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(166,255,203, 0.2)'
+    borderBottomWidth: 2.5,
+    borderBottomColor: 'rgba(166,255,203, 0.9)'
   },
   tab: {
     flex: 1,
@@ -375,7 +378,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   tabTextOpened: {
-    color: 'rgba(166,255,203, 0.2)',
+    color: 'rgba(166,255,203, 0.9)',
     fontSize: 12,
     textAlign: 'center'
   },
